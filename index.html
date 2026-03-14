@@ -531,6 +531,17 @@ body {
     flex-direction: column;
     gap: 0;
   }
+
+  .title-name {
+    display: none;
+  }
+
+  #energy-star {
+    top: auto;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+  }
 }
 
 /* ══ PRINT ════════════════════════════════════════════════════ */
@@ -605,7 +616,7 @@ body {
 
   <!-- Title bar -->
   <div id="bios-title">
-    AZIZ GHARIANI ── BIOS SETUP UTILITY v1.0
+    <span class="title-name">AZIZ GHARIANI ── </span>BIOS SETUP UTILITY v1.0
     <button id="lang-toggle" onclick="toggleLang()">EN</button>
   </div>
 
