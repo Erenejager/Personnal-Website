@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C:\AZIZ_GHARIANI\CV.EXE</title>
+<link href="https://fonts.cdnfonts.com/css/perfect-dos-vga-437" rel="stylesheet">
+<style>
+/* ══ RESET ════════════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000000;
+  color: #AAAAAA;
+  font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ══ CRT SCANLINE OVERLAY ═════════════════════════════════════ */
+#scanline {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.13) 2px,
+    rgba(0, 0, 0, 0.13) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ══ BOOT SCREEN ══════════════════════════════════════════════ */
+#boot {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 500;
+  overflow: hidden;
+}
+
+/* ── Phase: Windows 95 ── */
+#win95 {
+  display: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000 url('win95-boot.png') no-repeat center center;
+  background-size: 90% auto;
+}
+
+#win95-progress {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 36px;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 0 16px;
+}
+
+.w95seg {
+  width: 14px;
+  height: 22px;
+  background: #000E1A;
+  animation: w95wave 0.90s linear infinite;
+  flex-shrink: 0;
+}
+
+.w95seg:nth-child(1)  { animation-delay: -0.018s; }
+.w95seg:nth-child(2)  { animation-delay: -0.036s; }
+.w95seg:nth-child(3)  { animation-delay: -0.054s; }
+.w95seg:nth-child(4)  { animation-delay: -0.072s; }
+.w95seg:nth-child(5)  { animation-delay: -0.090s; }
+.w95seg:nth-child(6)  { animation-delay: -0.108s; }
+.w95seg:nth-child(7)  { animation-delay: -0.126s; }
+.w95seg:nth-child(8)  { animation-delay: -0.144s; }
+.w95seg:nth-child(9)  { animation-delay: -0.162s; }
+.w95seg:nth-child(10) { animation-delay: -0.180s; }
+.w95seg:nth-child(11) { animation-delay: -0.198s; }
+.w95seg:nth-child(12) { animation-delay: -0.216s; }
+.w95seg:nth-child(13) { animation-delay: -0.234s; }
+.w95seg:nth-child(14) { animation-delay: -0.252s; }
+.w95seg:nth-child(15) { animation-delay: -0.270s; }
+.w95seg:nth-child(16) { animation-delay: -0.288s; }
+.w95seg:nth-child(17) { animation-delay: -0.306s; }
+.w95seg:nth-child(18) { animation-delay: -0.324s; }
+.w95seg:nth-child(19) { animation-delay: -0.342s; }
+.w95seg:nth-child(20) { animation-delay: -0.360s; }
+
+@keyframes w95wave {
+  0%   { background: #000E1A; }
+  12%  { background: #002A55; }
+  28%  { background: #1055A0; }
+  42%  { background: #3A8FD8; }
+  54%  { background: #1C65B0; }
+  68%  { background: #083070; }
+  84%  { background: #001530; }
+  100% { background: #000E1A; }
+}
+
+/* ── Phase: POST ── */
+#post {
+  display: none;
+  position: absolute;
+  inset: 0;
+  padding: 24px 32px;
+  color: #FFFFFF;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+#energy-star {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  text-align: center;
+  font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
+}
+
+#energy-star svg {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+#energy-star .es-caption {
+  color: #55FF55;
+  font-size: 10px;
+  margin-top: 4px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+
+/* ══ BIOS CV SCREEN ══════════════════════════════════════════ */
+#cv {
+  display: none;
+  background: #000080;
+  min-height: 100vh;
+}
+
+/* ── Title bar ── (moved to language toggle section) */
+
+/* ── Tab bar ── */
+#bios-tabs {
+  position: fixed;
+  top: 28px;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: #000080;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 6px 12px 0;
+  border-bottom: 2px solid #00AAAA;
+}
+
+.bios-tab {
+  padding: 5px 16px;
+  font-size: 14px;
+  font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
+  color: #AAAAAA;
+  cursor: pointer;
+  border: 1px solid #555555;
+  border-bottom: none;
+  background: #000060;
+  position: relative;
+  top: 2px;
+  user-select: none;
+}
+
+.bios-tab:hover {
+  color: #FFFFFF;
+  background: #000080;
+}
+
+.bios-tab.active {
+  color: #FFFF55;
+  background: #000080;
+  border-color: #00AAAA;
+  top: 2px;
+  border-bottom: 2px solid #000080;
+  z-index: 1;
+}
+
+/* ── Content area ── */
+#bios-content {
+  padding: 68px 20px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ── Section styling ── */
+.bios-section {
+  margin-bottom: 8px;
+  scroll-margin-top: 72px;
+}
+
+.bios-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #00AAAA;
+}
+
+.bios-section-header .sec-icon {
+  color: #FFFF55;
+  font-size: 16px;
+}
+
+.bios-section-header .sec-title {
+  color: #FFFF55;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+/* ── BIOS field rows ── */
+.bios-field {
+  display: flex;
+  padding: 4px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  border-bottom: 1px solid #000060;
+}
+
+.bios-field:last-child {
+  border-bottom: none;
+}
+
+.bios-label {
+  color: #00AAAA;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+.bios-value {
+  color: #FFFFFF;
+}
+
+.bios-value-highlight {
+  color: #FFFF55;
+}
+
+/* ── Experience cards ── */
+.exp-card {
+  background: #000060;
+  border: 1px solid #00AAAA;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.exp-company {
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.exp-date {
+  color: #AAAAAA;
+  font-size: 14px;
+}
+
+.exp-role {
+  color: #FFFF55;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.exp-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.exp-bullets li {
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 2px 0 2px 4px;
+}
+
+.exp-bullets li::before {
+  content: '► ';
+  color: #00AAAA;
+  font-size: 12px;
+}
+
+/* ── Skills grid ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.skill-block {
+  background: #000060;
+  border: 1px solid #555555;
+  padding: 12px 16px;
+}
+
+.skill-block:hover {
+  border-color: #00AAAA;
+}
+
+.skill-cat {
+  color: #FFFF55;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skill-cat::before {
+  content: '\25BA ';
+  color: #00AAAA;
+}
+
+.skill-items {
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ── Project cards ── */
+.proj-card {
+  background: #000060;
+  border: 1px solid #555555;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+
+.proj-card:hover {
+  border-color: #00AAAA;
+}
+
+.proj-name {
+  color: #FFFFFF;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.proj-name::before {
+  content: '█ ';
+  color: #00AAAA;
+}
+
+.proj-body {
+  color: #AAAAAA;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.proj-url {
+  color: #00AAAA;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 6px;
+  display: inline-block;
+}
+
+.proj-url:hover {
+  color: #FFFF55;
+}
+
+/* ── Contact rows ── */
+.contact-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #000060;
+}
+
+.contact-row:last-child {
+  border-bottom: none;
+}
+
+.contact-icon {
+  color: #00AAAA;
+  min-width: 160px;
+}
+
+.contact-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.contact-link:hover {
+  color: #FFFF55;
+}
+
+/* ── Profile box ── */
+.profile-box {
+  background: #000060;
+  border: 1px solid #00AAAA;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+
+.profile-bio {
+  color: #AAAAAA;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #555555;
+}
+
+/* ── Horizontal rule ── */
+.bios-hr {
+  border: none;
+  border-top: 1px solid #00AAAA;
+  margin: 6px 0;
+}
+
+
+/* ══ LANGUAGE TOGGLE ══════════════════════════════════════════ */
+#lang-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000080;
+  color: #FFFF55;
+  border: 1px solid #FFFF55;
+  font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
+  font-size: 12px;
+  padding: 2px 10px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+#lang-toggle:hover {
+  background: #FFFF55;
+  color: #000080;
+}
+
+#bios-title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: #AAAAAA;
+  color: #000000;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 16px;
+  font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+/* ── Fade transition for language switch ── */
+#bios-content.lang-fade {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#bios-content {
+  transition: opacity 0.25s ease;
+  opacity: 1;
+}
+
+/* ══ SHUTDOWN EASTER EGG ══════════════════════════════════════ */
+#sd {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000080;
+  z-index: 900;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#sd-box {
+  border: 2px solid #FFFFFF;
+  padding: 28px 44px;
+  background: #000080;
+  max-width: 380px;
+}
+
+#sd-title { color: #FFFFFF; font-size: 16px; margin-bottom: 14px; }
+#sd-msg   { color: #AAAAAA; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+#sd-bar   { color: #FFFF55; font-size: 14px; margin-bottom: 14px; }
+#sd-hint  { color: #00AAAA; font-size: 12px; }
+
+/* ══ RESPONSIVE ══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bios-label {
+    min-width: 120px;
+  }
+
+  .bios-tab {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  #bios-content {
+    padding: 68px 10px 50px;
+  }
+
+  .exp-header {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* ══ PRINT ════════════════════════════════════════════════════ */
+@media print {
+  #boot, #scanline, #sd, #bios-title, #bios-tabs { display: none !important; }
+  #cv { display: block !important; }
+  #bios-content { padding: 10px; }
+  body { background: #fff; color: #000; }
+  .bios-section-header .sec-title,
+  .bios-section-header .sec-icon { color: #000; }
+  .exp-card, .skill-block, .proj-card, .profile-box { background: #fff; border-color: #000; }
+  .exp-company, .bios-value, .exp-bullets li, .skill-items, .proj-name, .contact-link { color: #000; }
+  .exp-role, .bios-value-highlight, .skill-cat, .bios-label, .contact-icon { color: #333; }
+  .proj-body, .profile-bio, .exp-date { color: #333; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ CRT SCANLINE ══════════════════════════════════════════ -->
+<div id="scanline"></div>
+
+<!-- ══ BOOT SCREEN ══════════════════════════════════════════ -->
+<div id="boot">
+
+  <!-- Phase 1: POST / IBM BIOS -->
+  <div id="post">
+    <div id="energy-star">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve">
+        <style>.es0{fill:#0093DD}.es1{fill:#FFFFFF}</style>
+        <rect class="es0" x="17.55" y="393.67" width="477.03" height="106.54"/>
+        <rect class="es1" x="5.76" y="0" width="500.48" height="393.8"/>
+        <path class="es0" d="M256,55.81c98.04,0,185.11,48.27,238.59,122.31V11.66H17.55v166.32C70.89,104.07,157.96,55.81,256,55.81z"/>
+        <path class="es0" d="M256,67.6c-99.27,0-187.03,50.73-238.45,127.66v186.76h477.03V195.26C443.03,118.33,355.27,67.6,256,67.6z"/>
+        <path class="es1" d="M256,67.6c99.27,0,187.03,50.73,238.59,127.79v-17.14C441.11,104.21,354.18,55.94,256,55.94c-98.04,0-185.11,48.27-238.45,122.31v17.14C68.97,118.33,156.73,67.6,256,67.6z"/>
+        <path class="es1" d="M64.45,263.4c-0.96,1.92-1.78,3.84-2.33,5.62c-19.2,5.76-31.95,0.69-32.77,0.27c-1.92-0.82-4.11,0.14-4.94,2.06s0,4.11,1.92,4.94c0.96,0.41,14.12,5.9,34.01,1.1c0,0.27,0,0.55,0,0.82c0,5.62,2.33,9.32,5.48,11.38c8.64,5.62,27.56,0.82,55.12-27.29c-1.78,5.07-3.43,10.7-4.39,16.32c0,0.27,0,0.55,0,0.69c0,1.65,0.96,3.02,2.47,3.57c3.02,1.23,4.66-1.23,6.17-3.43l3.84-5.62c3.29-4.94,10.7-16.18,15.77-21.94c-0.55,3.15-1.23,6.86-1.23,10.28c0,4.66,1.1,8.91,4.94,11.11c3.15,1.78,8.23,2.47,19.2-4.11c0.96,2.47,2.74,3.7,3.84,4.25c6.99,3.29,20.16-3.7,33.87-16.87c-1.92,4.11-3.29,7.68-3.7,9.05c-0.14,0.41-0.14,0.82-0.14,1.1c0,1.78,1.1,3.02,2.33,3.57c3.02,1.37,4.94-1.37,6.44-3.43l4.11-6.03c3.43-5.07,11.52-17,16.18-21.94c1.37,3.43,3.84,7.68,8.36,10.28c-1.23,2.88-1.92,5.48-1.92,7.68c0,2.61,0.96,4.66,3.02,5.9c3.57,2.47,8.91,1.1,14.53-1.92c-17.83,17.69-26.05,35.38-26.33,43.19c0,0.14,0,0.27,0,0.41c0,4.39,2.19,6.17,3.43,6.72c2.74,1.37,6.03,0.55,9.87-2.47c13.44-10.7,23.17-36.06,28.25-51.56c6.72-5.48,14.53-10.83,23.58-15.63c-2.88,5.07-4.52,10.01-4.52,13.85c0,1.37,0.27,2.74,0.69,3.84c1.1,2.74,3.29,4.52,6.03,4.8c6.17,0.69,14.81-5.76,24.96-18.24c-0.82,2.47-1.78,4.94-2.61,7.27c-28.11,22.08-40.72,45.8-42.37,58.69c-0.14,1.1-0.27,2.06-0.27,2.88c0,5.07,2.06,7.54,3.98,8.5c2.19,1.23,5.76,1.78,11.11-2.33c5.9-4.52,20.16-26.74,33.87-63.35c18.24-13.99,43.19-27.42,76.37-36.61c1.65-0.41,2.74-1.92,2.74-3.7c0-0.27,0-0.69-0.14-0.96c-0.55-2.06-2.61-3.15-4.66-2.61c-29.07,8.09-51.97,19.33-69.93,31.4c2.19-6.31,4.25-13.03,6.31-20.16c0.14-0.41,0.14-0.69,0.14-1.1c0-1.51-0.82-2.74-2.19-3.43c-1.65-0.82-3.7-0.14-4.66,1.37c-18.65,29.34-29.34,34.69-31.67,34.69c-0.14-0.27-0.27-0.69-0.27-1.1c0-3.29,2.88-11.66,12.07-21.53c0.69-0.69,1.1-1.65,1.1-2.61c0-0.69-0.27-1.51-0.69-2.19c-0.96-1.51-2.88-2.06-4.52-1.37c-11.79,4.94-21.94,10.97-30.85,17.14c0.14-0.41,0.14-0.69,0.14-0.69c0-0.27,0.14-0.55,0.14-0.96c0-1.37-0.82-2.74-2.06-3.29c-0.14,0-0.14,0-0.14,0c2.61-2.06,5.21-4.25,8.09-6.86c3.02-2.74,3.7-5.21,3.7-7.13c0-0.82-0.14-1.51-0.27-2.06c-0.82-2.61-3.29-4.39-6.72-4.8c-8.36-0.96-21.53,6.03-33.32,23.45c-3.98-2.19-5.62-7.4-6.31-9.87l-0.27-0.96c-0.55-1.51-1.92-2.61-3.57-2.61c-2.61,0-5.35,1.78-9.6,6.86c0-0.14,0.14-0.27,0.14-0.41c0.27-0.55,0.41-1.1,0.41-1.65c0-1.23-0.69-2.47-1.78-3.15c-1.65-0.96-3.84-0.55-4.94,0.96c-20.98,28.25-39.35,36.06-42.23,34.69c0-0.14-0.14-0.27-0.14-0.82c0-0.27,0-0.82,0.14-1.37c4.66-3.29,10.28-7.68,16.73-13.44c6.03-5.21,7.4-9.6,7.4-12.34c0-1.23-0.27-2.19-0.55-2.88c-1.23-2.88-4.25-4.52-7.82-4.25c-7.82,0.69-17.55,9.74-22.35,28.25c-12.2,8.36-15.49,6.99-15.91,6.72c-1.65-0.96-1.51-6.17,0.41-15.49c0.82-4.11,1.23-6.03,0.27-7.68c-0.96-1.65-2.47-2.74-4.39-2.74c-3.98-0.14-8.36,3.98-17.69,17.14c3.7-8.78,7.27-14.81,7.4-14.81c0.41-0.69,0.55-1.23,0.55-1.92c0-1.23-0.55-2.33-1.65-3.02c-1.65-1.1-3.84-0.82-5.07,0.69c-33.05,40.31-55.53,48.68-61.98,44.56c-1.37-0.96-2.06-2.61-2.06-4.94c0-0.96,0.14-2.06,0.41-3.15c12.34-4.39,26.74-12.89,41.82-28.38c8.91-9.19,13.71-17.69,13.71-24.27c0-1.51-0.27-2.88-0.69-4.11c-1.37-3.43-4.39-5.48-8.36-5.62C102.84,211.99,82.68,227.48,64.45,263.4z M114.36,220.07c1.37,0.14,1.65,0.55,1.78,0.82c0.14,0.27,0.14,0.82,0.14,1.37c0,3.29-2.88,10.01-11.66,18.92c-11.66,12.07-22.76,19.47-32.63,24C89.4,231.87,107.23,219.8,114.36,220.07z M188.54,239.82c1.23-0.69,2.06-0.82,2.61-0.82c-0.14,0.96-1.1,3.02-4.8,6.31c-2.74,2.33-5.21,4.52-7.54,6.31C182.64,243.66,186.89,240.64,188.54,239.82z M272.04,226.93c1.37-0.27,2.33-0.27,2.88-0.27c-0.14,0.27-0.41,0.55-0.82,0.96c-8.64,7.95-16.18,13.16-22.21,15.08C261.21,230.36,269.44,227.48,272.04,226.93z M260.66,246.95c-7.27,6.44-13.85,9.46-16.32,9.46c0-0.69,0.41-2.33,1.78-5.35C250.52,251.2,255.31,249.83,260.66,246.95z M257.78,267.79c-5.07,13.16-12.34,27.97-21.12,34.83c-0.41,0.27-0.82,0.55-1.1,0.82C235.84,298.1,242.56,283.42,257.78,267.79z M282.46,314.41c0-1.78,0.41-4.52,1.78-8.5c3.43-9.87,12.07-23.86,27.42-38.26c-11.52,27.7-22.35,44.02-26.33,47.03c-1.23,0.96-2.19,1.37-2.74,1.51C282.6,316.06,282.46,315.51,282.46,314.41z"/>
+        <path class="es1" d="M390.24,136.3c-2.33,0-4.39,1.37-5.21,3.57c0,0-20.7,52.93-23.04,58.96c-6.44,0.41-62.94,3.29-62.94,3.29c-3.02,0.14-5.35,2.61-5.35,5.62c0,0.14,0,0.14,0,0.27c0.14,3.15,2.74,5.48,5.9,5.35l66.64-3.57c2.19-0.14,4.11-1.51,4.94-3.57c0,0,12.61-32.36,19.06-48.95c6.44,16.59,18.92,48.81,18.92,48.81c0.82,2.06,2.74,3.43,4.94,3.57c0,0,34.42,1.92,51.97,3.02c-13.57,11.24-40.18,33.32-40.18,33.32c-1.37,1.1-2.06,2.61-2.06,4.39c0,0.41,0,0.96,0.14,1.37c0,0,8.5,33.32,12.89,50.46c-14.81-9.6-43.6-28.11-43.6-28.11c-1.78-1.23-4.25-1.23-6.03,0c0,0-29.21,18.51-44.29,28.11c4.66-16.59,12.89-46.48,12.89-46.48c0.14-0.55,0.14-0.96,0.14-1.51c0-2.47-1.65-4.66-4.11-5.48c-3.02-0.82-6.17,0.96-6.99,3.98l-16.73,60.61c-0.69,2.19,0.14,4.66,2.06,6.03s4.39,1.51,6.44,0.27c0,0,48.13-30.58,53.48-34.01c5.35,3.57,52.65,34.01,52.65,34.01c1.92,1.23,4.39,1.23,6.31-0.14c1.51-1.1,2.33-2.74,2.33-4.52c0-0.41-0.14-0.96-0.14-1.37c0,0-13.99-54.71-15.63-60.88c4.94-4.11,48.4-40.18,48.4-40.18c1.23-1.1,2.06-2.74,2.06-4.39c0-0.55-0.14-1.23-0.27-1.78c-0.69-2.19-2.74-3.7-5.07-3.84c0,0-56.08-3.15-62.53-3.57c-2.33-6.03-22.9-58.82-22.9-58.82C394.63,137.67,392.57,136.3,390.24,136.3z"/>
+        <polygon class="es1" points="494.45,393.67 494.45,500.34 17.55,500.34 17.55,393.67 5.76,393.67 5.76,500.34 5.76,512 17.55,512 494.45,512 506.24,512 506.24,512 506.24,393.67"/>
+        <polygon class="es1" points="38.12,476.9 38.12,417.25 68.83,417.25 68.83,423.83 45.66,423.83 45.66,443.03 67.19,443.03 67.19,449.61 45.66,449.61 45.66,470.18 69.24,470.18 69.24,476.9"/>
+        <polygon class="es1" points="119.7,417.25 119.7,476.9 109.28,476.9 85.7,425.07 85.56,425.07 85.56,476.9 78.84,476.9 78.84,417.25 89.54,417.25 112.85,468.26 112.99,468.26 112.99,417.25"/>
+        <polygon class="es1" points="130.26,476.9 130.26,417.25 160.98,417.25 160.98,423.83 137.8,423.83 137.8,443.03 159.33,443.03 159.33,449.61 137.8,449.61 137.8,470.18 161.53,470.18 161.53,476.9"/>
+        <path class="es1" d="M178.25,423.83h11.52c5.9,0,7.95,4.8,7.95,9.05c0,5.21-2.61,9.87-8.09,9.87h-11.38V423.83z M187.17,449.47c2.61,0,8.36,0.27,9.05,7.54c0.69,7.95,0.14,15.77,2.33,19.88h7.95c-1.23-3.7-2.06-13.03-2.06-15.63c-0.41-11.93-2.88-14.26-9.74-15.36v-0.14c6.99-1.23,10.97-6.58,10.97-13.57c0-7.4-3.7-14.95-14.26-14.95h-20.57v59.65h7.54v-27.42H187.17z"/>
+        <path class="es1" d="M242.29,433.16c0-6.99-2.88-10.83-10.56-10.83c-2.33,0-10.97,0.41-10.97,12.89v20.16c0,13.03,3.84,16.32,10.97,16.32c5.48,0,9.05-1.51,10.7-2.61v-17.83h-10.97v-6.58h18.65v29.07c-4.94,2.61-10.56,4.52-18.24,4.52c-12.61,0-18.79-6.58-18.79-23.04v-19.61c0-11.93,6.17-19.47,18.79-19.47c12.89,0,19.06,4.66,18.51,17.14L242.29,433.16z"/>
+        <polygon class="es1" points="286.44,417.25 294.12,417.25 277.8,454.14 277.8,476.9 270.26,476.9 270.26,454.14 254.22,417.25 262.72,417.25 274.37,446.05"/>
+        <path class="es1" d="M319.76,459.07v1.78c0,8.09,5.07,10.7,10.01,10.7c6.03,0,10.7-2.61,10.7-9.74c0-13.16-26.74-11.79-26.74-29.62c0-10.56,7.54-16.18,17.55-16.18c10.97,0,17,5.35,16.45,17.41h-7.95c0.14-6.58-1.92-10.83-9.19-10.83c-4.52,0-9.19,2.33-9.19,8.78c0,13.16,26.74,11.24,26.74,30.17c0,12.61-8.64,16.59-18.51,16.59c-17.55,0.14-17.55-13.3-17.41-19.06H319.76z"/>
+        <polygon class="es1" points="390.65,417.25 390.65,423.83 375.02,423.83 375.02,476.9 367.34,476.9 367.34,423.83 351.71,423.83 351.71,417.25"/>
+        <path class="es1" d="M417.53,456.06h-19.06l9.32-31.81h0.14L417.53,456.06z M384.34,476.9h7.68l4.52-14.26h23.04l4.25,14.26h8.5l-19.47-59.65h-9.74L384.34,476.9z"/>
+        <path class="es1" d="M445.77,423.83h11.52c5.9,0,7.95,4.8,7.95,9.05c0,5.21-2.61,9.87-8.09,9.87h-11.38V423.83z M454.68,449.47c2.61,0,8.36,0.27,9.05,7.54c0.69,7.95,0.14,15.77,2.33,19.88h7.95c-1.1-3.7-1.92-13.03-2.06-15.63c-0.41-11.93-2.88-14.26-9.74-15.36v-0.14c6.99-1.23,10.83-6.58,10.83-13.57c0-7.4-3.7-14.95-14.26-14.95h-20.57v59.65h7.54v-27.42H454.68z"/>
+      </svg>
+      <div class="es-caption">EPA POLLUTION PREVENTER</div>
+    </div>
+  </div>
+
+  <!-- Phase 2: Windows 95 -->
+  <div id="win95">
+    <div id="win95-progress">
+      <div class="w95seg"></div><div class="w95seg"></div><div class="w95seg"></div>
+      <div class="w95seg"></div><div class="w95seg"></div><div class="w95seg"></div>
+      <div class="w95seg"></div><div class="w95seg"></div><div class="w95seg"></div>
+      <div class="w95seg"></div><div class="w95seg"></div><div class="w95seg"></div>
+      <div class="w95seg"></div><div class="w95seg"></div><div class="w95seg"></div>
+      <div class="w95seg"></div><div class="w95seg"></div><div class="w95seg"></div>
+      <div class="w95seg"></div><div class="w95seg"></div>
+    </div>
+  </div>
+
+</div><!-- /boot -->
+
+<!-- ══ CV SCREEN — BIOS SETUP STYLE ════════════════════════ -->
+<div id="cv">
+
+  <!-- Title bar -->
+  <div id="bios-title">
+    AZIZ GHARIANI ── BIOS SETUP UTILITY v1.0
+    <button id="lang-toggle" onclick="toggleLang()">EN</button>
+  </div>
+
+  <!-- Tab bar -->
+  <div id="bios-tabs">
+    <div class="bios-tab active" data-sec="profile" onclick="navTo('profile')" data-i18n="tab_profile">PROFILE</div>
+    <div class="bios-tab" data-sec="experience" onclick="navTo('experience')" data-i18n="tab_experience">EXPERIENCE</div>
+    <div class="bios-tab" data-sec="skills" onclick="navTo('skills')" data-i18n="tab_skills">SKILLS</div>
+    <div class="bios-tab" data-sec="projects" onclick="navTo('projects')" data-i18n="tab_projects">PROJECTS</div>
+    <div class="bios-tab" data-sec="contact" onclick="navTo('contact')" data-i18n="tab_contact">CONTACT</div>
+  </div>
+
+  <!-- Scrollable content -->
+  <div id="bios-content">
+
+    <!-- ── PROFILE ── -->
+    <div id="profile" class="bios-section">
+      <div class="bios-section-header">
+        <span class="sec-icon">►</span>
+        <span class="sec-title" data-i18n="sec_profile">SYSTEM PROFILE</span>
+      </div>
+
+      <div class="profile-box">
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_name">NAME</span>
+          <span class="bios-value">Aziz Ghariani</span>
+        </div>
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_role">ROLE</span>
+          <span class="bios-value" data-i18n="val_role">Product Manager / Product Owner</span>
+        </div>
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_location">LOCATION</span>
+          <span class="bios-value" data-i18n="val_location">Paris, France</span>
+        </div>
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_experience">EXPERIENCE</span>
+          <span class="bios-value" data-i18n="val_experience">8+ years</span>
+        </div>
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_certification">CERTIFICATION</span>
+          <span class="bios-value">PSPO I</span>
+        </div>
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_languages">LANGUAGES</span>
+          <span class="bios-value" data-i18n="val_languages">French (native) · English (fluent)</span>
+        </div>
+        <div class="bios-field">
+          <span class="bios-label" data-i18n="lbl_status">STATUS</span>
+          <span class="bios-value-highlight" data-i18n="val_status">Open to freelance opportunities</span>
+        </div>
+
+        <div class="profile-bio" data-i18n-html="bio">
+          Product Manager with 6+ years of experience, I support tech and product teams across product definition, Agile delivery, and digital transformation engagements.<br><br>
+          Most recently, I led high-volume, complex platform delivery for a Media Company (MAM, 1M+ assets, 500+ users) and spearheaded the optimization of their search infrastructures (Elasticsearch).<br><br>
+          Bridging strategic vision and technical depth — bilingual French / English, available fully remote or in the Greater Paris area. PSPO I certified.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EXPERIENCE ── -->
+    <div id="experience" class="bios-section">
+      <div class="bios-section-header">
+        <span class="sec-icon">►</span>
+        <span class="sec-title" data-i18n="sec_experience">WORK HISTORY</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <span class="exp-company">EUROSPORT (WARNER BROS. DISCOVERY)</span>
+          <span class="exp-date" data-i18n="euro_date">10/2019 ── Present</span>
+        </div>
+        <div class="exp-role" data-i18n="euro_role">Product Manager Freelance — Plateforme OTT · Paris</div>
+        <ul class="exp-bullets">
+          <li data-i18n="euro_1">Led the transformation of a legacy desktop tool into a SaaS MAM platform (1M+ assets, 600+ daily users, 10+ European markets): Ingest (Import/Record), Search, Edit, Metadata, Logging, Export</li>
+          <li data-i18n="euro_2">Managed the Product Backlog: RICE prioritization, User Story writing, end-to-end release management (Dev → QA → Production)</li>
+          <li data-i18n="euro_3">Continuous QA and load testing: proactive incident detection, 30% reduction in regression bugs</li>
+          <li data-i18n="euro_4">Change management: product demos, training sessions, newsletters, and release notes</li>
+          <li data-i18n="euro_5">User research: user interviews and usability studies to guide product iterations</li>
+          <li data-i18n="euro_6">Search engine redesign (1M+ videos): quick filters, Elasticsearch relevance, admin panel for boost and metadata weight configuration, Excel-style column filtering</li>
+          <li data-i18n="euro_7">Close collaboration with technical teams to optimize SaaS infrastructure performance</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <span class="exp-company">SNCF GARES &amp; CONNEXIONS</span>
+          <span class="exp-date">02/2019 ── 07/2019</span>
+        </div>
+        <div class="exp-role">Product Owner API · Paris</div>
+        <ul class="exp-bullets">
+          <li data-i18n="sncf_1">Managed data ingestion APIs</li>
+          <li data-i18n="sncf_2">Led stakeholder workshops</li>
+          <li data-i18n="sncf_3">Defined interface contracts</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <span class="exp-company">RENAULT</span>
+          <span class="exp-date">07/2017 ── 01/2019</span>
+        </div>
+        <div class="exp-role">Product Owner · Paris</div>
+        <ul class="exp-bullets">
+          <li data-i18n="renault_1">Coordinated the rollout of a car configurator web app</li>
+          <li data-i18n="renault_2">Managed AWS migration</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── SKILLS ── -->
+    <div id="skills" class="bios-section">
+      <div class="bios-section-header">
+        <span class="sec-icon">►</span>
+        <span class="sec-title" data-i18n="sec_skills">TECHNICAL &amp; DOMAIN SKILLS</span>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-block">
+          <div class="skill-cat" data-i18n="skill_product">PRODUCT</div>
+          <div class="skill-items">
+            Product Discovery | User Stories &amp; Functional Specifications | Roadmapping | Prioritization (RICE, MoSCoW) | Stakeholder Mgmt
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat" data-i18n="skill_media">MEDIA / OTT</div>
+          <div class="skill-items">
+            MAM Systems | OTT Platforms | Broadcast workflows |
+            Video metadata | Metadata Mgmt | Search &amp; Discovery
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat" data-i18n="skill_technical">TECHNICAL &amp; TOOLS</div>
+          <div class="skill-items">
+            OpenSearch | Elasticsearch | BM25 | k-NN Vector Search |
+            Semantic search |
+            JIRA | Confluence | Postman | SQL |
+            Python | REST APIs | Kafka basics | Git | Grafana | Claude Code
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECTS ── -->
+    <div id="projects" class="bios-section">
+      <div class="bios-section-header">
+        <span class="sec-icon">►</span>
+        <span class="sec-title" data-i18n="sec_projects">SELECTED PROJECTS</span>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-name" data-i18n="proj_name">AI-POWERED MAM — RAG &amp; SEMANTIC SEARCH (PERSONAL PROJECT)</div>
+        <div class="proj-body" data-i18n-html="proj_body">
+          Work in progress / Proof of Concept
+          <br><br>
+          What I built:
+          <br>
+          ► A basic custom MAM to ingest and manage video assets
+          <br>
+          ► An automated transcription pipeline converting audio to searchable text
+          <br>
+          ► Vector embeddings to enable semantic search across assets
+          <br>
+          ► A RAG pipeline allowing natural language querying over the media library
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── CONTACT ── -->
+    <div id="contact" class="bios-section" style="min-height:80vh">
+      <div class="bios-section-header">
+        <span class="sec-icon">►</span>
+        <span class="sec-title" data-i18n="sec_contact">GET IN TOUCH</span>
+      </div>
+
+      <div class="profile-box">
+        <div class="contact-row">
+          <span class="contact-icon">EMAIL    ►</span>
+          <a class="contact-link" href="mailto:ghariani.aziz@gmail.com">ghariani.aziz@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">LINKEDIN ►</span>
+          <a class="contact-link" href="https://www.linkedin.com/in/aziz-ghariani-6319b77a/" target="_blank">linkedin.com/in/aziz-ghariani</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">GITHUB   ►</span>
+          <a class="contact-link" href="https://github.com/Erenejager?tab=repositories" target="_blank">github.com/Erenejager</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">CALENDLY ►</span>
+          <a class="contact-link" href="https://calendly.com/ghariani-aziz" target="_blank">calendly.com/ghariani-aziz</a>
+        </div>
+      </div>
+
+      <div style="text-align:center; color:#AAAAAA; font-size:13px; padding:14px 0 4px;">
+        <span data-i18n-html="hint_keys">Press <span style="color:#FFFF55;">ESC</span> to shutdown · <span style="color:#00AAAA;">F10</span> to export PDF</span>
+      </div>
+    </div>
+
+  </div><!-- /bios-content -->
+</div><!-- /cv -->
+
+
+<!-- ══ SHUTDOWN OVERLAY ══════════════════════════════════════ -->
+<div id="sd">
+  <div id="sd-box">
+    <div id="sd-title">Windows is shutting down...</div>
+    <div id="sd-msg">It is now safe to turn off<br>your computer.</div>
+    <div id="sd-bar">░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
+    <div id="sd-hint">Press any key or click to resume</div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   BOOT SEQUENCE
+════════════════════════════════════════════════════════ */
+
+function beep() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'square';
+    osc.frequency.value = 800;
+    gain.gain.value = 0.25;
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.15);
+  } catch (e) {}
+}
+
+function flicker(el, steps, intervalMs, cb) {
+  let i = 0;
+  function step() {
+    el.style.opacity = (i % 2 === 0) ? '0' : '1';
+    i++;
+    if (i < steps) setTimeout(step, intervalMs);
+    else { el.style.opacity = '1'; if (cb) cb(); }
+  }
+  step();
+}
+
+const POST_LINES = [
+  'Award Modular BIOS v4.51PG, An Energy Star Ally',
+  'Copyright (C) 1984-98, Award Software, Inc.',
+  '',
+  'CPU: Intel 486 DX2 @ 66MHz ........ OK',
+  'Memory Test: 640K OK',
+  'Extended Memory: 15360K OK',
+  '',
+  'Drive C: AZIZ_GHARIANI_CV ......... Found',
+  '',
+  'Loading MS-DOS 6.22...'
+];
+
+function printPost(container, lines, idx) {
+  if (idx >= lines.length) return;
+  const div = document.createElement('div');
+  div.textContent = lines[idx];
+  container.appendChild(div);
+  setTimeout(() => printPost(container, lines, idx + 1), 80);
+}
+
+/* ── Element refs ── */
+const $boot  = document.getElementById('boot');
+const $win95 = document.getElementById('win95');
+const $post  = document.getElementById('post');
+const $cv    = document.getElementById('cv');
+
+/* ── Boot chain — 5s cinematic sequence ── */
+window.addEventListener('load', () => {
+  beep();
+
+  setTimeout(() => {
+    $post.style.opacity    = '0';
+    $post.style.display    = 'block';
+    $post.style.transition = 'opacity 300ms';
+    requestAnimationFrame(() => { $post.style.opacity = '1'; });
+    printPost($post, POST_LINES, 0);
+  }, 300);
+
+  setTimeout(() => {
+    $post.style.transition = 'opacity 200ms';
+    $post.style.opacity    = '0';
+  }, 1600);
+
+  setTimeout(() => {
+    $post.style.display    = 'none';
+    $post.style.transition = '';
+    $post.style.opacity    = '1';
+    flicker($boot, 8, 30, null);
+  }, 1800);
+
+  setTimeout(() => {
+    $win95.style.opacity    = '0';
+    $win95.style.display    = 'block';
+    $win95.style.transition = 'opacity 400ms';
+    requestAnimationFrame(() => { $win95.style.opacity = '1'; });
+  }, 2100);
+
+  setTimeout(() => {
+    $win95.style.transition = 'opacity 200ms';
+    $win95.style.opacity    = '0';
+  }, 3800);
+
+  setTimeout(() => {
+    $win95.style.display    = 'none';
+    $win95.style.transition = '';
+    flicker($boot, 8, 30, () => {
+      $boot.style.transition = 'opacity 200ms';
+      $boot.style.opacity    = '0';
+      setTimeout(() => {
+        $boot.style.display = 'none';
+        $cv.style.display   = 'block';
+        applyLang(currentLang);
+        initObserver();
+      }, 200);
+    });
+  }, 4000);
+});
+
+/* ════════════════════════════════════════════════════════
+   CV NAVIGATION
+════════════════════════════════════════════════════════ */
+
+function navTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function exportPDF() { window.print(); }
+
+document.addEventListener('keydown', e => {
+  if (sdActive && e.key !== 'Escape') { closeSd(); return; }
+  switch (e.key) {
+    case 'F1':     e.preventDefault(); navTo('profile');    break;
+    case 'F2':     e.preventDefault(); navTo('experience'); break;
+    case 'F3':     e.preventDefault(); navTo('skills');     break;
+    case 'F4':     e.preventDefault(); navTo('projects');   break;
+    case 'F5':     e.preventDefault(); navTo('contact');    break;
+    case 'F10':    e.preventDefault(); exportPDF();         break;
+    case 'Escape': toggleSd();                              break;
+  }
+});
+
+/* IntersectionObserver — highlight active tab + F-key on scroll */
+function initObserver() {
+  const SECS = ['profile', 'experience', 'skills', 'projects', 'contact'];
+  const tabs  = document.querySelectorAll('.bios-tab[data-sec]');
+
+  function highlightTab(id) {
+    tabs.forEach(tab =>
+      tab.classList.toggle('active', tab.dataset.sec === id)
+    );
+  }
+
+  /* On scroll, find which section's top is closest to (but above) the viewport top */
+  function updateActiveTab() {
+    const scrollBottom = window.innerHeight + window.scrollY;
+    const docHeight = document.documentElement.scrollHeight;
+
+    /* If scrolled to bottom, highlight last section */
+    if (scrollBottom >= docHeight - 2) {
+      highlightTab('contact');
+      return;
+    }
+
+    let current = SECS[0];
+    for (const id of SECS) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 80) {
+        current = id;
+      }
+    }
+    highlightTab(current);
+  }
+
+  window.addEventListener('scroll', updateActiveTab, { passive: true });
+  updateActiveTab();
+}
+
+/* ════════════════════════════════════════════════════════
+   SHUTDOWN EASTER EGG
+════════════════════════════════════════════════════════ */
+
+const $sd    = document.getElementById('sd');
+const $sdBar = document.getElementById('sd-bar');
+let sdActive = false;
+let sdIv     = null;
+
+function toggleSd() { sdActive ? closeSd() : openSd(); }
+
+function openSd() {
+  sdActive = true;
+  $sd.style.display = 'flex';
+  $sdBar.textContent = '░'.repeat(26);
+  let n = 0;
+  sdIv = setInterval(() => {
+    n = Math.min(n + 1, 26);
+    $sdBar.textContent = '█'.repeat(n) + '░'.repeat(26 - n);
+    if (n >= 26) clearInterval(sdIv);
+  }, 80);
+}
+
+function closeSd() {
+  sdActive = false;
+  $sd.style.display = 'none';
+  if (sdIv) { clearInterval(sdIv); sdIv = null; }
+}
+
+$sd.addEventListener('click', closeSd);
+
+/* ════════════════════════════════════════════════════════
+   LANGUAGE TOGGLE — EN / FR
+════════════════════════════════════════════════════════ */
+
+let currentLang = 'fr';
+
+const i18n = {
+  /* ── Tabs ── */
+  tab_profile:    { en: 'PROFILE',    fr: 'PROFILE' },
+  tab_experience: { en: 'EXPERIENCE', fr: 'EXPERIENCE' },
+  tab_skills:     { en: 'SKILLS',     fr: 'SKILLS' },
+  tab_projects:   { en: 'PROJECTS',   fr: 'PROJECTS' },
+  tab_contact:    { en: 'CONTACT',    fr: 'CONTACT' },
+
+  /* ── Section headers ── */
+  sec_profile:    { en: 'SYSTEM PROFILE',             fr: 'PROFIL SYSTEME' },
+  sec_experience: { en: 'WORK HISTORY',               fr: 'PARCOURS PROFESSIONNEL' },
+  sec_skills:     { en: 'TECHNICAL & DOMAIN SKILLS',   fr: 'COMPETENCES TECHNIQUES & METIER' },
+  sec_projects:   { en: 'SELECTED PROJECTS',           fr: 'PROJETS SELECTIONNES' },
+  sec_contact:    { en: 'GET IN TOUCH',                fr: 'ME CONTACTER' },
+
+  /* ── Profile labels ── */
+  lbl_name:          { en: 'NAME',          fr: 'NOM' },
+  lbl_role:          { en: 'ROLE',          fr: 'POSTE' },
+  lbl_location:      { en: 'LOCATION',      fr: 'LOCALISATION' },
+  lbl_experience:    { en: 'EXPERIENCE',    fr: 'EXPERIENCE' },
+  lbl_certification: { en: 'CERTIFICATION', fr: 'CERTIFICATION' },
+  lbl_languages:     { en: 'LANGUAGES',     fr: 'LANGUES' },
+  lbl_status:        { en: 'STATUS',        fr: 'STATUT' },
+
+  /* ── Profile values ── */
+  val_role:       { en: 'Product Manager / Product Owner',          fr: 'Product Manager / Product Owner' },
+  val_location:   { en: 'Paris, France',                            fr: 'Paris, France' },
+  val_experience: { en: '8+ years',                                 fr: '8+ ans' },
+  val_languages:  { en: 'French (native) \u00b7 English (fluent)',  fr: 'Fran\u00e7ais (natif) - Anglais (courant)' },
+  val_status:     { en: 'Open to freelance opportunities',          fr: 'Ouvert aux opportunites freelance' },
+
+  /* ── Eurosport ── */
+  euro_date: { en: '10/2019 \u2500\u2500 Present', fr: '10/2019 \u2500\u2500 Aujourd\'hui' },
+  euro_role: { en: 'Product Manager Freelance \u2014 Plateforme OTT \u00b7 Paris', fr: 'Product Manager Freelance \u2014 Plateforme OTT - Paris' },
+  euro_1: { en: 'Led the transformation of a legacy desktop tool into a SaaS MAM platform (1M+ assets, 600+ daily users, 10+ European markets): Ingest (Import/Record), Search, Edit, Metadata, Logging, Export',
+            fr: 'Pilotage de la transformation d\'un outil desktop legacy vers une plateforme MAM SaaS (1M+ assets, 600+ utilisateurs/jour, 10+ marches europeens) : Ingest (Import/Record), Recherche, Modification, Metadonnees, Logging, Export' },
+  euro_2: { en: 'Managed the Product Backlog: RICE prioritization, User Story writing, end-to-end release management (Dev \u2192 QA \u2192 Production)',
+            fr: 'Gestion du Product Backlog : priorisation RICE, redaction de User Stories, pilotage des mises en production bout en bout (Dev \u2192 QA \u2192 Production)' },
+  euro_3: { en: 'Continuous QA and load testing: proactive incident detection, 30% reduction in regression bugs',
+            fr: 'QA et load tests continus : detection proactive des incidents, reduction de 30% des bugs de regression' },
+  euro_4: { en: 'Change management: product demos, training sessions, newsletters, and release notes',
+            fr: 'Conduite du changement : demos produit, formations, newsletters et notes de release' },
+  euro_5: { en: 'User research: user interviews and usability studies to guide product iterations',
+            fr: 'User research : interviews utilisateurs et etudes d\'utilisabilite pour orienter les iterations produit' },
+  euro_6: { en: 'Search engine redesign (1M+ videos): quick filters, Elasticsearch relevance, admin panel for boost and metadata weight configuration, Excel-style column filtering',
+            fr: 'Refonte du moteur de recherche (1M+ videos) : quick filters, pertinence Elasticsearch, admin panel de configuration des boosts et poids metadonnees, filtrage colonnes style Excel' },
+  euro_7: { en: 'Close collaboration with technical teams to optimize SaaS infrastructure performance',
+            fr: 'Collaboration etroite avec les equipes techniques pour optimiser les performances de l\'infrastructure SaaS' },
+
+  /* ── SNCF ── */
+  sncf_1: { en: 'Managed data ingestion APIs',    fr: 'Gestion des APIs d\'ingestion de donnees' },
+  sncf_2: { en: 'Led stakeholder workshops',       fr: 'Animation d\'ateliers avec les parties prenantes' },
+  sncf_3: { en: 'Defined interface contracts',      fr: 'Definition des contrats d\'interface' },
+
+  /* ── Renault ── */
+  renault_1: { en: 'Coordinated the rollout of a car configurator web app', fr: 'Coordination du deploiement d\'une Web App de configurateur automobile' },
+  renault_2: { en: 'Managed AWS migration',                                  fr: 'Gestion de la migration AWS' },
+
+  /* ── Skills categories ── */
+  skill_product:   { en: 'PRODUCT',          fr: 'PRODUIT' },
+  skill_media:     { en: 'MEDIA / OTT',      fr: 'MEDIA / OTT' },
+  skill_technical: { en: 'TECHNICAL & TOOLS', fr: 'TECHNIQUE & OUTILS' },
+
+  /* ── Project (uses innerHTML) ── */
+  proj_name: { en: 'AI-POWERED MAM \u2014 RAG & SEMANTIC SEARCH (PERSONAL PROJECT)',
+               fr: 'MAM/IA - RAG & RECHERCHE SEMANTIQUE (PROJET PERSONNEL)' },
+};
+
+/* ── innerHTML entries ── */
+const i18nHtml = {
+  bio: {
+    en: 'Product Manager with 6+ years of experience, I support tech and product teams across product definition, Agile delivery, and digital transformation engagements.<br><br>Most recently, I led high-volume, complex platform delivery for a Media Company (MAM, 1M+ assets, 500+ users) and spearheaded the optimization of their search infrastructures (Elasticsearch).<br><br>Bridging strategic vision and technical depth \u2014 bilingual French / English, available fully remote or in the Greater Paris area. PSPO I certified.',
+    fr: 'Product Manager avec plus de 6 ans d\'experience, j\'accompagne des equipes tech et produit sur des missions de definition produit, delivery Agile et transformation digitale.<br><br>J\'ai notamment pilote des plateformes complexes a fort volume chez Eurosport / Warner Bros. Discovery (MAM, 1M+ assets, 500+ utilisateurs) et pilote l\'optimisation d\'infrastructures de recherche a grande echelle (Elasticsearch / OpenSearch).<br><br>A l\'aise aussi bien cote vision strategique que cadrage technique, bilingue fran\u00e7ais / anglais, disponible full remote ou Ile-de-France. Certifie PSPO I.'
+  },
+  proj_body: {
+    en: 'Work in progress / Proof of Concept<br><br>What I built:<br>\u25ba A basic custom MAM to ingest and manage video assets<br>\u25ba An automated transcription pipeline converting audio to searchable text<br>\u25ba Vector embeddings to enable semantic search across assets<br>\u25ba A RAG pipeline allowing natural language querying over the media library',
+    fr: 'Travail en cours<br><br>\u25ba Un MAM basic avec import et gestion des assets video<br>\u25ba Un pipeline de transcription automatique convertissant l\'audio en texte recherchable<br>\u25ba Des embeddings vectoriels pour la recherche semantique sur les assets<br>\u25ba Un pipeline RAG permettant d\'interroger la mediatheque en langage naturel'
+  },
+  hint_keys: {
+    en: 'Press <span style="color:#FFFF55;">ESC</span> to shutdown \u00b7 <span style="color:#00AAAA;">F10</span> to export PDF',
+    fr: 'Appuyez sur <span style="color:#FFFF55;">ESC</span> pour eteindre - <span style="color:#00AAAA;">F10</span> pour exporter en PDF'
+  }
+};
+
+function applyLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[key] && i18n[key][lang]) el.textContent = i18n[key][lang];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (i18nHtml[key] && i18nHtml[key][lang]) el.innerHTML = i18nHtml[key][lang];
+  });
+}
+
+function toggleLang() {
+  const content = document.getElementById('bios-content');
+  const btn = document.getElementById('lang-toggle');
+  const tabs = document.getElementById('bios-tabs');
+
+  /* Fade out */
+  content.classList.add('lang-fade');
+  tabs.style.transition = 'opacity 0.25s ease';
+  tabs.style.opacity = '0';
+
+  setTimeout(() => {
+    currentLang = (currentLang === 'en') ? 'fr' : 'en';
+    applyLang(currentLang);
+    btn.textContent = (currentLang === 'en') ? 'FR' : 'EN';
+    document.documentElement.lang = currentLang;
+
+    /* Fade in */
+    content.classList.remove('lang-fade');
+    tabs.style.opacity = '1';
+  }, 250);
+}
+</script>
+</body>
+</html>
