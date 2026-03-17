@@ -507,43 +507,92 @@ body {
 
 /* ══ RESPONSIVE ══════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .bios-label {
-    min-width: 120px;
-  }
-
-  .bios-tab {
-    padding: 5px 8px;
-    font-size: 12px;
-  }
-
-  #bios-content {
-    padding: 68px 10px 50px;
-  }
-
-  .exp-header {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .title-name {
-    display: none;
-  }
-
+  /* ── Boot screens ── */
+  #post { padding: 24px 16px; font-size: 13px; }
+  #win95 { background-size: 100% auto; }
   #energy-star {
     top: auto;
     bottom: 20px;
     right: 50%;
     transform: translateX(50%);
   }
+  #energy-star svg { width: 60px; height: 60px; }
 
-  .cv-hero-name { font-size: 14px; }
-  .cv-body      { grid-template-columns: 1fr; }
+  /* ── Shutdown overlay ── */
+  #sd-box { max-width: 90vw; padding: 20px 24px; }
+
+  /* ── Fixed header stack ── */
+  #cv-hero { padding: 10px 12px 10px; }
+  #bios-tabs { top: 148px; }
+
+  /* ── Tab bar ── */
+  .bios-tab { padding: 5px 8px; font-size: 12px; letter-spacing: 0; }
+
+  /* ── Content area ── */
+  #bios-content { padding: 192px 10px 60px; }
+  .bios-section { scroll-margin-top: 200px; }
+
+  /* ── Hero band ── */
+  .cv-hero-name { font-size: 18px; letter-spacing: 2px; }
+  .cv-hero-role { font-size: 12px; }
+  .cv-hero-stats { justify-content: center; gap: 6px; }
+  .cv-stat { flex: 1 1 calc(33% - 6px); min-width: auto; padding: 5px 6px; }
+  .cv-stat-val { font-size: 14px; }
+  .cv-stat-lbl { font-size: 8px; }
+
+  /* ── Two-column → single column ── */
+  .cv-body { grid-template-columns: 1fr; }
+  .cv-col { padding: 12px 14px; }
   .cv-col:first-child { border-right: none; border-bottom: 1px solid #1a1a1a; }
-  #bios-content { padding: 212px 10px 50px; }
+
+  /* ── Profile fields ── */
+  .field-row { font-size: 13px; }
+  .field-lbl { min-width: 120px; }
+  .bio-text { font-size: 12px; }
+
+  /* ── Timeline ── */
+  .tl-company { font-size: 13px; word-break: break-word; }
+  .tl-role { font-size: 12px; }
+  .tl-date { font-size: 11px; }
+
+  /* ── Tags & pills ── */
+  .tag  { font-size: 11px; padding: 3px 7px; }
+  .pill { font-size: 10px; padding: 2px 5px; }
+
+  /* ── Highlights ── */
+  .highlight-body { font-size: 12px; }
+  .highlight-block { margin-bottom: 10px; }
+
+  /* ── Projects ── */
+  .proj-name-new { font-size: 13px; word-break: break-word; }
+  .proj-desc-new { font-size: 12px; word-break: break-word; overflow-wrap: break-word; }
+
+  /* ── Contact ── */
+  .contact-icon { min-width: 100px; font-size: 13px; }
+  .contact-link { font-size: 13px; word-break: break-all; }
+
+  /* ── Legacy ── */
+  .skills-grid { grid-template-columns: 1fr; }
+  .bios-label { min-width: 90px; }
+  .exp-header { flex-direction: column; gap: 0; }
+  .title-name { display: none; }
+}
+
+/* ── Extra small screens (phones < 480px) ── */
+@media (max-width: 480px) {
+  /* ── Hero band ── */
+  .cv-hero-name { font-size: 15px; letter-spacing: 1px; }
+  .cv-hero-role { font-size: 11px; }
+  .cv-stat { flex: 1 1 calc(50% - 6px); }
+
+  /* ── Tab bar ── */
+  .bios-tab { padding: 5px 5px; font-size: 11px; }
+
+  /* ── Tags ── */
+  .tag  { font-size: 10px; padding: 2px 6px; }
+
+  /* ── Contact ── */
+  .contact-icon { min-width: 80px; font-size: 12px; }
 }
 
 /* ── Hero band ── */
