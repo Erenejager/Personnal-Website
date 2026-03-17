@@ -524,12 +524,21 @@ body {
   /* ── Hero band: compact to fit in ~115px ── */
   #cv-hero { padding: 8px 12px 8px; }
   .cv-hero-name { font-size: 16px; letter-spacing: 1px; margin-bottom: 2px; }
-  .cv-hero-role { font-size: 11px; margin-bottom: 8px; }
-  .cv-hero-stats { gap: 4px; }
-  .cv-stat { flex: 1 1 calc(33.33% - 4px); min-width: 0; padding: 3px 4px; }
-  .cv-stat-val { font-size: 12px; }
-  .cv-stat-lbl { font-size: 7px; letter-spacing: 0; margin-top: 1px; }
-  .cv-stat.open .cv-stat-val { font-size: 10px; }
+  .cv-hero-role { font-size: 11px; margin-bottom: 6px; }
+  .cv-hero-stats { gap: 3px; }
+  .cv-stat {
+    flex: 1 1 calc(33.33% - 3px);
+    min-width: 0;
+    padding: 2px 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .cv-stat-val { font-size: 10px; display: inline; white-space: nowrap; }
+  .cv-stat-lbl { font-size: 7px; display: inline; margin-top: 0; letter-spacing: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cv-stat.open .cv-stat-val,
   .cv-stat.cert .cv-stat-val { font-size: 10px; }
 
   /* ── Fixed header stack: bios-title(28) + hero(~115) = 143 ── */
