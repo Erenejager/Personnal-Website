@@ -198,7 +198,7 @@ body {
 /* ── Section styling ── */
 .bios-section {
   margin-bottom: 8px;
-  scroll-margin-top: 72px;
+  scroll-margin-top: 200px;
 }
 
 .bios-section-header {
@@ -560,22 +560,25 @@ body {
 
 .cv-hero-name {
   color: #FFFFFF;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: 4px;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+  text-align: center;
 }
 
 .cv-hero-role {
   color: #FFFF55;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 1px;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .cv-hero-stats {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cv-stat {
@@ -588,13 +591,13 @@ body {
 
 .cv-stat-val {
   color: #FFFF55;
-  font-size: 14px;
+  font-size: 16px;
   display: block;
 }
 
 .cv-stat-lbl {
   color: #AAAAAA;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 1px;
   margin-top: 1px;
   display: block;
@@ -624,7 +627,7 @@ body {
 
 .col-title {
   color: #00AAAA;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 3px;
   padding-bottom: 5px;
   border-bottom: 1px solid #1a1a1a;
@@ -636,11 +639,11 @@ body {
   display: flex;
   padding: 5px 0;
   border-bottom: 1px solid #0a0a0a;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.6;
 }
 .field-row:last-child { border-bottom: none; }
-.field-lbl { color: #00AAAA; min-width: 130px; flex-shrink: 0; }
+.field-lbl { color: #00AAAA; min-width: 145px; flex-shrink: 0; }
 .field-val { color: #FFFFFF; }
 .field-val-open { color: #55FF55; }
 
@@ -652,7 +655,7 @@ body {
 }
 .bio-text {
   color: #AAAAAA;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.8;
 }
 
@@ -682,37 +685,37 @@ body {
 }
 .timeline-item:last-child::after { display: none; }
 
-.tl-date    { color: #555555; font-size: 9px; letter-spacing: 1px; margin-bottom: 2px; }
-.tl-company { color: #FFFFFF; font-size: 13px; margin-bottom: 2px; }
-.tl-role    { color: #FFFF55; font-size: 11px; margin-bottom: 6px; }
+.tl-date    { color: #555555; font-size: 11px; letter-spacing: 1px; margin-bottom: 2px; }
+.tl-company { color: #FFFFFF; font-size: 14px; margin-bottom: 2px; }
+.tl-role    { color: #FFFF55; font-size: 12px; margin-bottom: 6px; }
 .tl-pills   { display: flex; flex-wrap: wrap; gap: 4px; }
 
-.pill        { font-size: 9px; padding: 2px 6px; border: 1px solid #00AAAA; color: #00AAAA; display: inline-block; }
+.pill        { font-size: 10px; padding: 2px 7px; border: 1px solid #00AAAA; color: #00AAAA; display: inline-block; }
 .pill.yellow { border-color: #FFFF55; color: #FFFF55; }
 
 /* ── Experience highlights ── */
 .highlight-block { margin-bottom: 14px; }
 .highlight-title {
   color: #FFFF55;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1px;
   margin-bottom: 6px;
 }
 .highlight-body {
   color: #AAAAAA;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
 }
 
 /* ── Tier tags ── */
 .tier-block   { margin-bottom: 14px; }
-.tier-heading { font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+.tier-heading { font-size: 11px; letter-spacing: 2px; margin-bottom: 6px; }
 .tier-heading.core    { color: #FFFF55; }
 .tier-heading.solid   { color: #00AAAA; }
 .tier-heading.familiar{ color: #555555; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.tag  { font-size: 10px; padding: 3px 8px; border: 1px solid transparent; display: inline-block; }
+.tag  { font-size: 11px; padding: 3px 9px; border: 1px solid transparent; display: inline-block; }
 .tag.core     { border-color: #FFFF55; color: #FFFF55; }
 .tag.solid    { border-color: #00AAAA; color: #00AAAA; }
 .tag.familiar { border-color: #444444; color: #555555; }
@@ -725,11 +728,11 @@ body {
   padding: 10px 12px;
   margin-bottom: 10px;
 }
-.proj-name-new  { color: #FFFFFF; font-size: 12px; margin-bottom: 4px; }
-.proj-status    { color: #555555; font-size: 9px; margin-bottom: 6px; }
-.proj-desc-new  { color: #AAAAAA; font-size: 10px; line-height: 1.6; }
+.proj-name-new  { color: #FFFFFF; font-size: 13px; margin-bottom: 4px; }
+.proj-status    { color: #555555; font-size: 10px; margin-bottom: 6px; }
+.proj-desc-new  { color: #AAAAAA; font-size: 12px; line-height: 1.6; }
 .proj-tags-new  { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-.proj-tag-new   { font-size: 9px; border: 1px solid #333333; color: #555555; padding: 1px 5px; }
+.proj-tag-new   { font-size: 10px; border: 1px solid #333333; color: #555555; padding: 2px 6px; }
 
 /* ══ PRINT ════════════════════════════════════════════════════ */
 @media print {
@@ -816,7 +819,7 @@ body {
 
   <!-- Title bar -->
   <div id="bios-title">
-    <span class="title-name">AZIZ GHARIANI ── </span>BIOS SETUP UTILITY v1.0
+    BIOS SETUP UTILITY v1.0
     <button id="lang-toggle" onclick="toggleLang()">EN</button>
   </div>
 
