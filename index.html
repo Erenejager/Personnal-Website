@@ -142,7 +142,7 @@ body {
 /* ══ BIOS CV SCREEN ══════════════════════════════════════════ */
 #cv {
   display: none;
-  background: #000080;
+  background: #000000;
   min-height: 100vh;
 }
 
@@ -151,11 +151,11 @@ body {
 /* ── Tab bar ── */
 #bios-tabs {
   position: fixed;
-  top: 28px;
+  top: 148px;
   left: 0;
   right: 0;
   z-index: 300;
-  background: #000080;
+  background: #000;
   display: flex;
   justify-content: center;
   gap: 0;
@@ -165,35 +165,31 @@ body {
 
 .bios-tab {
   padding: 5px 16px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
-  color: #AAAAAA;
+  color: #555;
   cursor: pointer;
-  border: 1px solid #555555;
-  border-bottom: none;
-  background: #000060;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
   position: relative;
-  top: 2px;
   user-select: none;
+  letter-spacing: 1px;
 }
 
-.bios-tab:hover {
-  color: #FFFFFF;
-  background: #000080;
-}
+.bios-tab:hover { color: #FFFFFF; background: transparent; }
 
 .bios-tab.active {
   color: #FFFF55;
-  background: #000080;
-  border-color: #00AAAA;
-  top: 2px;
-  border-bottom: 2px solid #000080;
+  background: #0a0a1a;
+  border-bottom: 2px solid #FFFF55;
+  margin-bottom: -2px;
   z-index: 1;
 }
 
 /* ── Content area ── */
 #bios-content {
-  padding: 68px 20px 20px;
+  padding: 184px 20px 20px;
   max-width: 1100px;
   margin: 0 auto;
   min-height: 100vh;
@@ -470,6 +466,7 @@ body {
   font-size: 16px;
   font-family: 'Perfect DOS VGA 437', 'Courier New', monospace;
   letter-spacing: 1px;
+  line-height: 1.125;
 }
 
 /* ── Fade transition for language switch ── */
@@ -542,7 +539,197 @@ body {
     right: 50%;
     transform: translateX(50%);
   }
+
+  .cv-hero-name { font-size: 14px; }
+  .cv-body      { grid-template-columns: 1fr; }
+  .cv-col:first-child { border-right: none; border-bottom: 1px solid #1a1a1a; }
+  #bios-content { padding: 184px 10px 50px; }
 }
+
+/* ── Hero band ── */
+#cv-hero {
+  position: fixed;
+  top: 28px;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: #000080;
+  border-bottom: 2px solid #00AAAA;
+  padding: 14px 20px 12px;
+}
+
+.cv-hero-name {
+  color: #FFFFFF;
+  font-size: 20px;
+  letter-spacing: 4px;
+  margin-bottom: 3px;
+}
+
+.cv-hero-role {
+  color: #FFFF55;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.cv-hero-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cv-stat {
+  background: #000060;
+  border: 1px solid #00AAAA;
+  padding: 5px 10px;
+  text-align: center;
+  min-width: 68px;
+}
+
+.cv-stat-val {
+  color: #FFFF55;
+  font-size: 14px;
+  display: block;
+}
+
+.cv-stat-lbl {
+  color: #AAAAAA;
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-top: 1px;
+  display: block;
+}
+
+.cv-stat.open { border-color: #55FF55; }
+.cv-stat.open .cv-stat-val { color: #55FF55; font-size: 11px; }
+
+.cv-stat.cert { border-color: #555; }
+.cv-stat.cert .cv-stat-val { color: #AAAAAA; font-size: 11px; }
+
+/* ── Two-column layout ── */
+.cv-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+.cv-col {
+  padding: 16px 18px;
+}
+
+.cv-col:first-child {
+  border-right: 1px solid #1a1a1a;
+}
+
+.col-title {
+  color: #00AAAA;
+  font-size: 10px;
+  letter-spacing: 3px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 12px;
+}
+
+/* ── Profile fields ── */
+.field-row {
+  display: flex;
+  padding: 5px 0;
+  border-bottom: 1px solid #0a0a0a;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.field-row:last-child { border-bottom: none; }
+.field-lbl { color: #00AAAA; min-width: 130px; flex-shrink: 0; }
+.field-val { color: #FFFFFF; }
+.field-val-open { color: #55FF55; }
+
+/* ── Bio block ── */
+.bio-block {
+  background: #050518;
+  border-left: 3px solid #000080;
+  padding: 10px 12px;
+}
+.bio-text {
+  color: #AAAAAA;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+/* ── Timeline ── */
+.timeline-item {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 18px;
+}
+.timeline-item::before {
+  content: '█';
+  color: #00AAAA;
+  font-size: 8px;
+  position: absolute;
+  left: 0;
+  top: 2px;
+  line-height: 1;
+}
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 12px;
+  width: 1px;
+  height: calc(100% + 6px);
+  background: #1a1a1a;
+}
+.timeline-item:last-child::after { display: none; }
+
+.tl-date    { color: #555555; font-size: 9px; letter-spacing: 1px; margin-bottom: 2px; }
+.tl-company { color: #FFFFFF; font-size: 13px; margin-bottom: 2px; }
+.tl-role    { color: #FFFF55; font-size: 11px; margin-bottom: 6px; }
+.tl-pills   { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.pill        { font-size: 9px; padding: 2px 6px; border: 1px solid #00AAAA; color: #00AAAA; display: inline-block; }
+.pill.yellow { border-color: #FFFF55; color: #FFFF55; }
+
+/* ── Experience highlights ── */
+.highlight-block { margin-bottom: 14px; }
+.highlight-title {
+  color: #FFFF55;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.highlight-body {
+  color: #AAAAAA;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* ── Tier tags ── */
+.tier-block   { margin-bottom: 14px; }
+.tier-heading { font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+.tier-heading.core    { color: #FFFF55; }
+.tier-heading.solid   { color: #00AAAA; }
+.tier-heading.familiar{ color: #555555; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag  { font-size: 10px; padding: 3px 8px; border: 1px solid transparent; display: inline-block; }
+.tag.core     { border-color: #FFFF55; color: #FFFF55; }
+.tag.solid    { border-color: #00AAAA; color: #00AAAA; }
+.tag.familiar { border-color: #444444; color: #555555; }
+
+/* ── Project cards (new) ── */
+.proj-card-new {
+  background: #050518;
+  border: 1px solid #1a1a1a;
+  border-left: 3px solid #00AAAA;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.proj-name-new  { color: #FFFFFF; font-size: 12px; margin-bottom: 4px; }
+.proj-status    { color: #555555; font-size: 9px; margin-bottom: 6px; }
+.proj-desc-new  { color: #AAAAAA; font-size: 10px; line-height: 1.6; }
+.proj-tags-new  { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.proj-tag-new   { font-size: 9px; border: 1px solid #333333; color: #555555; padding: 1px 5px; }
 
 /* ══ PRINT ════════════════════════════════════════════════════ */
 @media print {
@@ -557,6 +744,19 @@ body {
   .exp-role, .bios-value-highlight, .skill-cat, .bios-label, .contact-icon { color: #333; }
   .proj-body, .profile-bio, .exp-date { color: #333; }
   a { color: #000; }
+  #cv-hero { display: block !important; position: static !important; }
+  .cv-body { display: block !important; }
+  .cv-col  { border-right: none !important; border-bottom: none !important; }
+  .tag, .pill { border-color: #000 !important; color: #000 !important; }
+  .timeline-item::before { color: #000 !important; }
+  .timeline-item::after  { background: #ccc !important; }
+  .tl-company, .tl-role, .tl-date, .bio-text,
+  .field-val, .proj-desc-new, .proj-name-new,
+  .contact-link, .highlight-body { color: #000 !important; }
+  .field-lbl, .contact-icon, .col-title,
+  .tier-heading, .highlight-title { color: #333 !important; }
+  .cv-stat-val, .cv-stat-lbl { color: #000 !important; }
+  .cv-stat { border-color: #000 !important; background: #fff !important; }
 }
 </style>
 </head>
@@ -620,6 +820,38 @@ body {
     <button id="lang-toggle" onclick="toggleLang()">EN</button>
   </div>
 
+  <!-- Hero band -->
+  <div id="cv-hero">
+    <div class="cv-hero-name">AZIZ GHARIANI</div>
+    <div class="cv-hero-role">Product Manager / Product Owner &nbsp;·&nbsp; Paris, France</div>
+    <div class="cv-hero-stats">
+      <div class="cv-stat">
+        <span class="cv-stat-val">7+</span>
+        <span class="cv-stat-lbl">YRS EXP</span>
+      </div>
+      <div class="cv-stat">
+        <span class="cv-stat-val">PM</span>
+        <span class="cv-stat-lbl">PRODUCT MANAGEMENT</span>
+      </div>
+      <div class="cv-stat">
+        <span class="cv-stat-val">SaaS</span>
+        <span class="cv-stat-lbl">SaaS B2B</span>
+      </div>
+      <div class="cv-stat">
+        <span class="cv-stat-val">600</span>
+        <span class="cv-stat-lbl">DAILY USERS</span>
+      </div>
+      <div class="cv-stat open">
+        <span class="cv-stat-val">OPEN</span>
+        <span class="cv-stat-lbl">FREELANCE</span>
+      </div>
+      <div class="cv-stat cert">
+        <span class="cv-stat-val">PSPO I</span>
+        <span class="cv-stat-lbl">CERTIFIED</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Tab bar -->
   <div id="bios-tabs">
     <div class="bios-tab active" data-sec="profile" onclick="navTo('profile')" data-i18n="tab_profile">PROFILE</div>
@@ -639,40 +871,49 @@ body {
         <span class="sec-title" data-i18n="sec_profile">SYSTEM PROFILE</span>
       </div>
 
-      <div class="profile-box">
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_name">NAME</span>
-          <span class="bios-value">Aziz Ghariani</span>
+      <div class="cv-body">
+        <!-- Left: field rows -->
+        <div class="cv-col">
+          <div class="col-title">// SYSTEM INFO</div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_name">NAME</span>
+            <span class="field-val">Aziz Ghariani</span>
+          </div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_role">ROLE</span>
+            <span class="field-val" data-i18n="val_role">Product Manager / Product Owner</span>
+          </div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_location">LOCATION</span>
+            <span class="field-val" data-i18n="val_location">Paris, France</span>
+          </div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_experience">EXPERIENCE</span>
+            <span class="field-val" data-i18n="val_experience">7+ years</span>
+          </div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_certification">CERTIFICATION</span>
+            <span class="field-val">PSPO I</span>
+          </div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_languages">LANGUAGES</span>
+            <span class="field-val" data-i18n="val_languages">French (native) · English (fluent)</span>
+          </div>
+          <div class="field-row">
+            <span class="field-lbl" data-i18n="lbl_status">STATUS</span>
+            <span class="field-val field-val-open" data-i18n="val_status">► Open to freelance opportunities</span>
+          </div>
         </div>
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_role">ROLE</span>
-          <span class="bios-value" data-i18n="val_role">Product Manager / Product Owner</span>
-        </div>
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_location">LOCATION</span>
-          <span class="bios-value" data-i18n="val_location">Paris, France</span>
-        </div>
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_experience">EXPERIENCE</span>
-          <span class="bios-value" data-i18n="val_experience">8+ years</span>
-        </div>
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_certification">CERTIFICATION</span>
-          <span class="bios-value">PSPO I</span>
-        </div>
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_languages">LANGUAGES</span>
-          <span class="bios-value" data-i18n="val_languages">French (native) · English (fluent)</span>
-        </div>
-        <div class="bios-field">
-          <span class="bios-label" data-i18n="lbl_status">STATUS</span>
-          <span class="bios-value-highlight" data-i18n="val_status">Open to freelance opportunities</span>
-        </div>
-
-        <div class="profile-bio" data-i18n-html="bio">
-          Product Manager with 6+ years of experience, I support tech and product teams across product definition, Agile delivery, and digital transformation engagements.<br><br>
-          Most recently, I led high-volume, complex platform delivery for a Media Company (MAM, 1M+ assets, 500+ users) and spearheaded the optimization of their search infrastructures (Elasticsearch).<br><br>
-          Bridging strategic vision and technical depth — bilingual French / English, available fully remote or in the Greater Paris area. PSPO I certified.
+        <!-- Right: bio -->
+        <div class="cv-col">
+          <div class="col-title">// BIO</div>
+          <div class="bio-block">
+            <div class="bio-text" data-i18n-html="bio">
+              Product Manager with 6+ years of experience, I support tech and product teams across product definition, Agile delivery, and digital transformation engagements.<br><br>
+              Most recently, I led high-volume, complex platform delivery for a Media Company (MAM, 1M+ assets, 500+ users) and spearheaded the optimization of their search infrastructures (Elasticsearch).<br><br>
+              Bridging strategic vision and technical depth — bilingual French / English, available fully remote or in the Greater Paris area. PSPO I certified.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -684,46 +925,77 @@ body {
         <span class="sec-title" data-i18n="sec_experience">WORK HISTORY</span>
       </div>
 
-      <div class="exp-card">
-        <div class="exp-header">
-          <span class="exp-company">EUROSPORT (WARNER BROS. DISCOVERY)</span>
-          <span class="exp-date" data-i18n="euro_date">10/2019 ── Present</span>
-        </div>
-        <div class="exp-role" data-i18n="euro_role">Product Manager Freelance — Plateforme OTT · Paris</div>
-        <ul class="exp-bullets">
-          <li data-i18n="euro_1">Led the transformation of a legacy desktop tool into a SaaS MAM platform (1M+ assets, 600+ daily users, 10+ European markets): Ingest (Import/Record), Search, Edit, Metadata, Logging, Export</li>
-          <li data-i18n="euro_2">Managed the Product Backlog: RICE prioritization, User Story writing, end-to-end release management (Dev → QA → Production)</li>
-          <li data-i18n="euro_3">Continuous QA and load testing: proactive incident detection, 30% reduction in regression bugs</li>
-          <li data-i18n="euro_4">Change management: product demos, training sessions, newsletters, and release notes</li>
-          <li data-i18n="euro_5">User research: user interviews and usability studies to guide product iterations</li>
-          <li data-i18n="euro_6">Search engine redesign (1M+ videos): quick filters, Elasticsearch relevance, admin panel for boost and metadata weight configuration, Excel-style column filtering</li>
-          <li data-i18n="euro_7">Close collaboration with technical teams to optimize SaaS infrastructure performance</li>
-        </ul>
-      </div>
+      <div class="cv-body">
+        <!-- Left: timeline -->
+        <div class="cv-col">
+          <div class="col-title">// TIMELINE</div>
 
-      <div class="exp-card">
-        <div class="exp-header">
-          <span class="exp-company">SNCF GARES &amp; CONNEXIONS</span>
-          <span class="exp-date">02/2019 ── 07/2019</span>
-        </div>
-        <div class="exp-role">Product Owner API · Paris</div>
-        <ul class="exp-bullets">
-          <li data-i18n="sncf_1">Managed data ingestion APIs</li>
-          <li data-i18n="sncf_2">Led stakeholder workshops</li>
-          <li data-i18n="sncf_3">Defined interface contracts</li>
-        </ul>
-      </div>
+          <div class="timeline-item">
+            <div class="tl-date" data-i18n="euro_date">10/2019 ── Present</div>
+            <div class="tl-company">EUROSPORT (WARNER BROS. DISCOVERY)</div>
+            <div class="tl-role" data-i18n="euro_role">PM Freelance — OTT Platform · Paris</div>
+            <div class="tl-pills">
+              <span class="pill yellow">1M+ assets</span>
+              <span class="pill yellow">600 users/day</span>
+              <span class="pill yellow">10+ markets</span>
+              <span class="pill yellow">-30% bugs</span>
+            </div>
+          </div>
 
-      <div class="exp-card">
-        <div class="exp-header">
-          <span class="exp-company">RENAULT</span>
-          <span class="exp-date">07/2017 ── 01/2019</span>
+          <div class="timeline-item">
+            <div class="tl-date">02/2019 ── 07/2019</div>
+            <div class="tl-company">SNCF GARES &amp; CONNEXIONS</div>
+            <div class="tl-role">Product Owner API · Paris</div>
+            <div class="tl-pills">
+              <span class="pill">Data APIs</span>
+              <span class="pill" data-i18n="sncf_2">Stakeholder mgmt</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="tl-date">07/2017 ── 01/2019</div>
+            <div class="tl-company">RENAULT</div>
+            <div class="tl-role">Product Owner · Paris</div>
+            <div class="tl-pills">
+              <span class="pill">Web App</span>
+              <span class="pill" data-i18n="renault_2">AWS Migration</span>
+            </div>
+          </div>
         </div>
-        <div class="exp-role">Product Owner · Paris</div>
-        <ul class="exp-bullets">
-          <li data-i18n="renault_1">Coordinated the rollout of a car configurator web app</li>
-          <li data-i18n="renault_2">Managed AWS migration</li>
-        </ul>
+
+        <!-- Right: Eurosport highlights (static EN) -->
+        <div class="cv-col">
+          <div class="col-title">// HIGHLIGHTS — EUROSPORT</div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">PLATFORM DELIVERY</div>
+            <div class="highlight-body">
+              ► Legacy desktop → SaaS MAM platform<br>
+              ► Ingest · Search · Edit · Metadata · Export<br>
+              ► RICE prioritization · User Story writing<br>
+              ► Dev → QA → Production release management
+            </div>
+          </div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">SEARCH ENGINE REDESIGN</div>
+            <div class="highlight-body">
+              ► 1M+ video assets indexed<br>
+              ► Elasticsearch relevance tuning<br>
+              ► Admin panel: boost &amp; metadata weights<br>
+              ► Excel-style column filtering
+            </div>
+          </div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">QUALITY &amp; CHANGE MGMT</div>
+            <div class="highlight-body">
+              ► Continuous QA + load testing<br>
+              ► -30% regression bugs<br>
+              ► Product demos · Training · Newsletters
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -734,27 +1006,74 @@ body {
         <span class="sec-title" data-i18n="sec_skills">TECHNICAL &amp; DOMAIN SKILLS</span>
       </div>
 
-      <div class="skills-grid">
-        <div class="skill-block">
-          <div class="skill-cat" data-i18n="skill_product">PRODUCT</div>
-          <div class="skill-items">
-            Product Discovery | User Stories &amp; Functional Specifications | Roadmapping | Prioritization (RICE, MoSCoW) | Stakeholder Mgmt
+      <div class="cv-body">
+        <!-- Left: tier tags -->
+        <div class="cv-col">
+          <div class="col-title">// CAPABILITIES</div>
+
+          <div class="tier-block">
+            <div class="tier-heading core">█ CORE EXPERTISE</div>
+            <div class="tags">
+              <span class="tag core">Product Management</span>
+              <span class="tag core">Agile / Scrum</span>
+              <span class="tag core">Product Discovery</span>
+              <span class="tag core">Stakeholder Management</span>
+              <span class="tag core">Backlog Management</span>
+              <span class="tag core">User Research</span>
+              <span class="tag core">Roadmapping</span>
+            </div>
+          </div>
+
+          <div class="tier-block">
+            <div class="tier-heading solid">░ SOLID KNOWLEDGE</div>
+            <div class="tags">
+              <span class="tag solid">Elasticsearch</span>
+              <span class="tag solid">OpenSearch</span>
+              <span class="tag solid">REST APIs</span>
+              <span class="tag solid">JIRA · Confluence</span>
+              <span class="tag solid">Postman</span>
+              <span class="tag solid">RAG</span>
+              <span class="tag solid">RICE · MoSCoW</span>
+            </div>
+          </div>
+
+          <div class="tier-block">
+            <div class="tier-heading familiar">· FAMILIAR WITH</div>
+            <div class="tags">
+              <span class="tag familiar">Python</span>
+              <span class="tag familiar">SQL</span>
+              <span class="tag familiar">Kafka basics</span>
+              <span class="tag familiar">Git</span>
+              <span class="tag familiar">Grafana</span>
+              <span class="tag familiar">Claude Code</span>
+            </div>
           </div>
         </div>
-        <div class="skill-block">
-          <div class="skill-cat" data-i18n="skill_media">MEDIA / OTT</div>
-          <div class="skill-items">
-            MAM Systems | OTT Platforms | Broadcast workflows |
-            Video metadata | Metadata Mgmt | Search &amp; Discovery
+
+        <!-- Right: domain focus -->
+        <div class="cv-col">
+          <div class="col-title">// DOMAIN FOCUS</div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">MEDIA &amp; TECHNOLOGY</div>
+            <div class="highlight-body">
+              ► Media Asset Management (MAM)<br>
+              ► OTT streaming platforms<br>
+              ► Search &amp; discovery systems<br>
+              ► Broadcast workflow digitisation<br>
+              ► Video metadata standards
+            </div>
           </div>
-        </div>
-        <div class="skill-block">
-          <div class="skill-cat" data-i18n="skill_technical">TECHNICAL &amp; TOOLS</div>
-          <div class="skill-items">
-            OpenSearch | Elasticsearch | BM25 | k-NN Vector Search |
-            Semantic search |
-            JIRA | Confluence | Postman | SQL |
-            Python | REST APIs | Kafka basics | Git | Grafana | Claude Code
+
+          <div class="highlight-block">
+            <div class="highlight-title">DELIVERY METHODS</div>
+            <div class="highlight-body">
+              ► Scrum / Kanban<br>
+              ► Product Discovery<br>
+              ► User Story mapping<br>
+              ► End-to-end release management<br>
+              ► Continuous QA &amp; load testing
+            </div>
           </div>
         </div>
       </div>
@@ -767,20 +1086,48 @@ body {
         <span class="sec-title" data-i18n="sec_projects">SELECTED PROJECTS</span>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-name" data-i18n="proj_name">AI-POWERED MAM — RAG &amp; SEMANTIC SEARCH (PERSONAL PROJECT)</div>
-        <div class="proj-body" data-i18n-html="proj_body">
-          Work in progress / Proof of Concept
-          <br><br>
-          What I built:
-          <br>
-          ► A basic custom MAM to ingest and manage video assets
-          <br>
-          ► An automated transcription pipeline converting audio to searchable text
-          <br>
-          ► Vector embeddings to enable semantic search across assets
-          <br>
-          ► A RAG pipeline allowing natural language querying over the media library
+      <div class="cv-body">
+        <!-- Left: project cards -->
+        <div class="cv-col">
+          <div class="col-title">// SELECTED PROJECTS</div>
+
+          <div class="proj-card-new">
+            <div class="proj-name-new" data-i18n="proj_name">█ AI-POWERED MAM — RAG &amp; SEMANTIC SEARCH</div>
+            <div class="proj-status">PERSONAL PROJECT · IN PROGRESS</div>
+            <div class="proj-desc-new" data-i18n-html="proj_body">
+              ► Custom MAM to ingest and manage video assets<br>
+              ► Automated transcription pipeline (audio → searchable text)<br>
+              ► Vector embeddings for semantic search across assets<br>
+              ► RAG pipeline for natural language querying
+            </div>
+            <div class="proj-tags-new">
+              <span class="proj-tag-new">Python</span>
+              <span class="proj-tag-new">RAG</span>
+              <span class="proj-tag-new">Semantic Search</span>
+              <span class="proj-tag-new">Vector DB</span>
+              <span class="proj-tag-new">Transcription</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: notable achievements -->
+        <div class="cv-col">
+          <div class="col-title">// NOTABLE ACHIEVEMENTS</div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">MAM PLATFORM TRANSFORMATION</div>
+            <div class="highlight-body">Led legacy desktop → SaaS migration for 600+ daily users across 10+ EU markets</div>
+          </div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">SEARCH ENGINE AT SCALE</div>
+            <div class="highlight-body">Redesigned Elasticsearch engine across 1M+ video assets with relevance tuning</div>
+          </div>
+
+          <div class="highlight-block">
+            <div class="highlight-title">QUALITY IMPROVEMENT</div>
+            <div class="highlight-body">-30% regression bugs through proactive QA &amp; load testing protocols</div>
+          </div>
         </div>
       </div>
 
