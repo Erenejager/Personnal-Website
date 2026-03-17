@@ -1315,6 +1315,7 @@ window.addEventListener('load', () => {
         $boot.style.display = 'none';
         $cv.style.display   = 'block';
         applyLang(currentLang);
+        positionHeader();
         initObserver();
       }, 200);
     });
@@ -1354,6 +1355,35 @@ document.addEventListener('keydown', e => {
     case 'Escape': toggleSd();                              break;
   }
 });
+
+/* ── Dynamic header stack positioning for mobile ── */
+function positionHeader() {
+  const title   = document.getElementById('bios-title');
+  const hero    = document.getElementById('cv-hero');
+  const tabs    = document.getElementById('bios-tabs');
+  const content = document.getElementById('bios-content');
+  if (!hero || !tabs || !content) return;
+
+  if (window.innerWidth <= 768) {
+    const titleH = title ? title.offsetHeight : 28;
+    const heroH  = hero.offsetHeight;
+    const tabsH  = tabs.offsetHeight;
+    const tabTop = titleH + heroH;
+    const pad    = tabTop + tabsH + 8;
+    tabs.style.top = tabTop + 'px';
+    content.style.paddingTop = pad + 'px';
+    document.querySelectorAll('.bios-section').forEach(s => {
+      s.style.scrollMarginTop = (pad + 4) + 'px';
+    });
+  } else {
+    tabs.style.top = '';
+    content.style.paddingTop = '';
+    document.querySelectorAll('.bios-section').forEach(s => {
+      s.style.scrollMarginTop = '';
+    });
+  }
+}
+window.addEventListener('resize', positionHeader);
 
 /* IntersectionObserver — highlight active tab + F-key on scroll */
 function initObserver() {
