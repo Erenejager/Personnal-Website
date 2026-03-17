@@ -1295,12 +1295,17 @@ window.addEventListener('load', () => {
    CV NAVIGATION
 ════════════════════════════════════════════════════════ */
 
+let _navLock = false;
+
 function navTo(id) {
   const el = document.getElementById(id);
   if (el) {
     document.querySelectorAll('.bios-tab[data-sec]').forEach(t =>
       t.classList.toggle('active', t.dataset.sec === id)
     );
+    _navLock = true;
+    clearTimeout(window._navLockTimer);
+    window._navLockTimer = setTimeout(() => { _navLock = false; }, 900);
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
@@ -1333,6 +1338,7 @@ function initObserver() {
 
   /* On scroll, find which section's top is closest to (but above) the viewport top */
   function updateActiveTab() {
+    if (_navLock) return;
     const scrollBottom = window.innerHeight + window.scrollY;
     const docHeight = document.documentElement.scrollHeight;
 
