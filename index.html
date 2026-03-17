@@ -521,24 +521,26 @@ body {
   /* ── Shutdown overlay ── */
   #sd-box { max-width: 90vw; padding: 20px 24px; }
 
-  /* ── Fixed header stack ── */
-  #cv-hero { padding: 10px 12px 10px; }
-  #bios-tabs { top: 148px; }
+  /* ── Hero band: compact to fit in ~115px ── */
+  #cv-hero { padding: 8px 12px 8px; }
+  .cv-hero-name { font-size: 16px; letter-spacing: 1px; margin-bottom: 2px; }
+  .cv-hero-role { font-size: 11px; margin-bottom: 8px; }
+  .cv-hero-stats { gap: 4px; }
+  .cv-stat { flex: 1 1 calc(33.33% - 4px); min-width: 0; padding: 3px 4px; }
+  .cv-stat-val { font-size: 12px; }
+  .cv-stat-lbl { font-size: 7px; letter-spacing: 0; margin-top: 1px; }
+  .cv-stat.open .cv-stat-val { font-size: 10px; }
+  .cv-stat.cert .cv-stat-val { font-size: 10px; }
+
+  /* ── Fixed header stack: bios-title(28) + hero(~115) = 143 ── */
+  #bios-tabs { top: 155px; }
 
   /* ── Tab bar ── */
   .bios-tab { padding: 5px 8px; font-size: 12px; letter-spacing: 0; }
 
   /* ── Content area ── */
-  #bios-content { padding: 192px 10px 60px; }
-  .bios-section { scroll-margin-top: 200px; }
-
-  /* ── Hero band ── */
-  .cv-hero-name { font-size: 18px; letter-spacing: 2px; }
-  .cv-hero-role { font-size: 12px; }
-  .cv-hero-stats { justify-content: center; gap: 6px; }
-  .cv-stat { flex: 1 1 calc(33% - 6px); min-width: auto; padding: 5px 6px; }
-  .cv-stat-val { font-size: 14px; }
-  .cv-stat-lbl { font-size: 8px; }
+  #bios-content { padding: 200px 10px 60px; }
+  .bios-section { scroll-margin-top: 208px; }
 
   /* ── Two-column → single column ── */
   .cv-body { grid-template-columns: 1fr; }
@@ -580,12 +582,11 @@ body {
 
 /* ── Extra small screens (phones < 480px) ── */
 @media (max-width: 480px) {
-  /* ── Hero band ── */
-  .cv-hero-name { font-size: 15px; letter-spacing: 1px; }
-  .cv-hero-role { font-size: 11px; }
-  .cv-stat { flex: 1 1 calc(50% - 6px); }
+  /* ── Hero band: keep 3-per-row stat grid ── */
+  .cv-hero-name { font-size: 14px; }
+  .cv-hero-role { font-size: 10px; }
 
-  /* ── Tab bar ── */
+  /* ── Tab bar: tightest fit ── */
   .bios-tab { padding: 5px 5px; font-size: 11px; }
 
   /* ── Tags ── */
