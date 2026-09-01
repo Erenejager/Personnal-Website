@@ -515,6 +515,9 @@ a { color: inherit; }
   color: var(--green);
 }
 
+.technical-evidence span { display: block; }
+.technical-evidence span + span { margin-top: 7px; }
+
 .timeline-role {
   margin: 0 0 12px;
   color: var(--blue);
