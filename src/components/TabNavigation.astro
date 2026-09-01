@@ -1,0 +1,29 @@
+---
+const tabs = [
+  { id: 'profile', key: 'F1', fr: 'Profil', en: 'Profile' },
+  { id: 'mission', key: 'F2', fr: 'Mission 01', en: 'Mission 01' },
+  { id: 'lab', key: 'F3', fr: 'Laboratoire', en: 'Personal lab' },
+  { id: 'experience', key: 'F4', fr: 'Parcours', en: 'Experience' },
+  { id: 'skills', key: 'F5', fr: 'Compétences', en: 'Skills' },
+  { id: 'contact', key: 'F6', fr: 'Contact', en: 'Contact' },
+];
+---
+
+<nav class="bios-tabs" aria-label="Navigation principale" role="tablist">
+  {tabs.map((tab, index) => (
+    <a
+      id={`${tab.id}-tab`}
+      class="bios-tab"
+      href={`#${tab.id}`}
+      role="tab"
+      aria-selected={index === 0 ? 'true' : 'false'}
+      aria-controls={`${tab.id}-panel`}
+      data-target={tab.id}
+      data-fr={tab.fr}
+      data-en={tab.en}
+      data-key={tab.key}
+    >
+      {tab.fr}
+    </a>
+  ))}
+</nav>

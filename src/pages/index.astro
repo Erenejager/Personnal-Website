@@ -1,0 +1,432 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UtilityBar from '../components/UtilityBar.astro';
+import TabNavigation from '../components/TabNavigation.astro';
+import KeyBar from '../components/KeyBar.astro';
+
+const missionOwnership = [
+  {
+    fr: 'Pilotage de la roadmap et traduction des objectifs métier en priorités et jalons de livraison.',
+    en: 'Owned the roadmap and translated business objectives into priorities and delivery milestones.',
+  },
+  {
+    fr: 'Entretiens utilisateurs, ateliers de besoins et études d’usage dans plusieurs marchés.',
+    en: 'Ran user interviews, requirements workshops, and usability studies across several markets.',
+  },
+  {
+    fr: 'Gestion des cycles de release de bout en bout, du développement à la production.',
+    en: 'Managed complete release cycles from development through QA to production.',
+  },
+  {
+    fr: 'Alignement des équipes éditoriales, opérationnelles et techniques.',
+    en: 'Aligned editorial, operational, and technical teams.',
+  },
+];
+
+const labs = [
+  {
+    id: 'LAB_01 / COMPUTER VISION',
+    titleFr: 'Segmentation de temps forts tennis',
+    titleEn: 'Tennis highlight segmentation',
+    bodyFr: 'Outil de gestion média avec segmentation automatique des temps forts, lecteur vidéo et recherche de moments précis.',
+    bodyEn: 'Media management tool with automatic highlight segmentation, video playback, and search for specific moments.',
+  },
+  {
+    id: 'LAB_02 / LLM + MARKET DATA',
+    titleFr: 'Matching emploi et compétences marché',
+    titleEn: 'Job matching and market skills',
+    bodyFr: 'Agrégation d’offres, scoring LLM face à un CV et tableau de bord des compétences demandées par secteur.',
+    bodyEn: 'Job aggregation, LLM-based CV matching, and a dashboard tracking skills demanded by industry.',
+  },
+  {
+    id: 'LAB_03 / RAG',
+    titleFr: 'Générateur d’onboarding',
+    titleEn: 'Onboarding generator',
+    bodyFr: 'Pipeline RAG qui ingère la documentation interne d’une entreprise et génère un parcours d’intégration structuré.',
+    bodyEn: 'RAG pipeline that ingests internal company documents and generates a structured onboarding course.',
+  },
+  {
+    id: 'LAB_04 / DECISION SUPPORT',
+    titleFr: 'Intelligence marché crypto',
+    titleEn: 'Crypto market intelligence',
+    bodyFr: 'Analyse de tendances micro et macro, comparaison avec des configurations passées et génération d’un score d’entrée.',
+    bodyEn: 'Micro- and macro-trend analysis, comparison with past setups, and generation of an entry score.',
+  },
+];
+
+const experience = [
+  {
+    date: '10/2019 — NOW',
+    company: 'Eurosport / Warner Bros. Discovery',
+    roleFr: 'Technical Product Manager — Video Streaming & OTT',
+    roleEn: 'Technical Product Manager — Video Streaming & OTT',
+    bodyFr: 'Transformation d’une plateforme MAM critique, pilotage de la roadmap, discovery multi-marchés, releases de bout en bout et résolution d’incidents de production.',
+    bodyEn: 'Critical MAM platform transformation, roadmap ownership, multi-market discovery, end-to-end releases, and production incident resolution.',
+  },
+  {
+    date: '02/2019 — 07/2019',
+    company: 'SNCF Gares & Connexions',
+    roleFr: 'Product Owner API',
+    roleEn: 'API Product Owner',
+    bodyFr: 'Pilotage d’API d’ingestion pour les flux de trafic ferroviaire, ateliers parties prenantes et définition des contrats d’interface.',
+    bodyEn: 'Managed data-ingestion APIs for railway traffic flows, facilitated stakeholder workshops, and defined interface contracts.',
+  },
+  {
+    date: '09/2016',
+    company: 'Telecom Lille',
+    roleFr: 'Diplôme d’ingénieur — Télécommunications',
+    roleEn: 'Engineering master’s degree — Telecommunications',
+    bodyFr: 'Formation d’ingénieur constituant le socle technique utilisé pour collaborer avec les équipes de développement et d’architecture.',
+    bodyEn: 'Engineering background providing the technical foundation used to work with development and architecture teams.',
+  },
+];
+
+const capabilities = [
+  {
+    fr: 'Stratégie et discovery',
+    en: 'Strategy and discovery',
+    items: 'Product strategy · User research · Design Thinking · JTBD · OKRs · Stakeholder management',
+  },
+  {
+    fr: 'Delivery et opérations',
+    en: 'Delivery and operations',
+    items: 'Roadmap · Backlog · Build & Run · Release management · Incidents · KPI monitoring',
+  },
+  {
+    fr: 'Profondeur technique',
+    en: 'Technical fluency',
+    items: 'REST APIs · Elasticsearch · Kafka · Microservices · SQL · Observability · AI / RAG',
+  },
+];
+
+const skillGroups = [
+  {
+    code: 'SKILL_01',
+    titleFr: 'Stratégie & discovery',
+    titleEn: 'Strategy & discovery',
+    items: 'Product strategy · Roadmap · User research · Design Thinking · JTBD · OKRs · Stakeholder management',
+    proofFr: 'Preuve : transformation Eurosport',
+    proofEn: 'Evidence: Eurosport transformation',
+    target: 'mission',
+  },
+  {
+    code: 'SKILL_02',
+    titleFr: 'Delivery & opérations',
+    titleEn: 'Delivery & operations',
+    items: 'Backlog · Build & Run · Release management · QA → Production · Incident management · KPI monitoring',
+    proofFr: 'Preuve : mission et parcours',
+    proofEn: 'Evidence: mission and experience',
+    target: 'experience',
+  },
+  {
+    code: 'SKILL_03',
+    titleFr: 'Produit technique',
+    titleEn: 'Technical product',
+    items: 'REST APIs · API contracts · Elasticsearch · OpenSearch · Kafka · Microservices · SQL · Grafana',
+    proofFr: 'Preuve : Eurosport + SNCF',
+    proofEn: 'Evidence: Eurosport + SNCF',
+    target: 'experience',
+  },
+  {
+    code: 'SKILL_04',
+    titleFr: 'IA & prototypage',
+    titleEn: 'AI & prototyping',
+    items: 'AI pipelines · RAG · Vector search · Python · OCR / YOLO · LLM workflows · Git',
+    proofFr: 'Preuve : laboratoire personnel',
+    proofEn: 'Evidence: personal lab',
+    target: 'lab',
+  },
+];
+
+const pageTitle = 'Aziz Ghariani — Product Manager / Product Owner';
+const pageDescription = 'Product Manager / Product Owner à Paris. Produits complexes, plateformes SaaS, data, APIs et IA.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="bios-shell">
+    <UtilityBar />
+    <TabNavigation />
+
+    <main class="panel-stack" id="main-panel">
+      <section
+        class="screen"
+        id="profile-panel"
+        data-panel="profile"
+        data-active="true"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+      >
+        <div class="main-pane profile-pane" data-screen-label="SYSTEM PROFILE / 01">
+          <div>
+            <p class="eyebrow" data-fr="Profil chargé" data-en="Profile loaded">Profil chargé</p>
+            <h1 class="profile-title">Aziz<br />Ghariani</h1>
+            <p class="role">Product Manager / Product Owner</p>
+            <p
+              class="statement"
+              data-fr="Je transforme des produits complexes en expériences simples, fiables et utiles. J’aligne stratégie, besoins utilisateurs et contraintes techniques pour faire avancer des produits à grande échelle."
+              data-en="I transform complex products into simple, reliable, and useful experiences. I align strategy, user needs, and technical constraints to move products forward at scale."
+            >
+              Je transforme des produits complexes en expériences simples, fiables et utiles. J’aligne stratégie, besoins utilisateurs et contraintes techniques pour faire avancer des produits à grande échelle.<span class="cursor" aria-hidden="true"></span>
+            </p>
+          </div>
+
+          <div class="actions">
+            <a class="action action-primary" href="mailto:ghariani.aziz@gmail.com" data-fr="Me contacter [Entrée]" data-en="Contact me [Enter]">Me contacter [Entrée]</a>
+            <a class="action" href="https://calendly.com/ghariani-aziz" target="_blank" rel="noreferrer" data-fr="Réserver un échange [F10]" data-en="Book a conversation [F10]">Réserver un échange [F10]</a>
+          </div>
+        </div>
+
+        <aside class="side-pane" aria-label="Résumé du profil">
+          <div class="side-title"><span data-fr="État du système" data-en="System status">État du système</span><span>READY</span></div>
+          <dl class="status-list">
+            <div class="status-row"><dt data-fr="Localisation" data-en="Location">Localisation</dt><dd>Paris, France</dd></div>
+            <div class="status-row"><dt data-fr="Expérience" data-en="Experience">Expérience</dt><dd data-fr="7+ ans" data-en="7+ years">7+ ans</dd></div>
+            <div class="status-row"><dt data-fr="Disponibilité" data-en="Availability">Disponibilité</dt><dd class="online" data-fr="Ouvert" data-en="Open">Ouvert</dd></div>
+            <div class="status-row"><dt data-fr="Langues" data-en="Languages">Langues</dt><dd>FR / EN</dd></div>
+            <div class="status-row"><dt data-fr="Certification" data-en="Certification">Certification</dt><dd>PSPO I</dd></div>
+          </dl>
+          <div class="impact-block">
+            <h2 class="impact-heading" data-fr="Impact sélectionné" data-en="Selected impact">Impact sélectionné</h2>
+            <div class="impact"><strong>1M+</strong><span data-fr="actifs gérés" data-en="managed assets">actifs gérés</span></div>
+            <div class="impact"><strong>500+</strong><span data-fr="utilisateurs / jour" data-en="daily users">utilisateurs / jour</span></div>
+            <div class="impact impact-outcome"><strong>−40%</strong><span data-fr="chargement recherche" data-en="search loading">chargement recherche</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section
+        class="screen"
+        id="mission-panel"
+        data-panel="mission"
+        data-active="false"
+        role="tabpanel"
+        aria-labelledby="mission-tab"
+      >
+        <div class="main-pane" data-screen-label="MISSION FILE / 01">
+          <p class="eyebrow" data-fr="Mission 01 / Eurosport" data-en="Mission 01 / Eurosport">Mission 01 / Eurosport</p>
+          <h2 class="section-title" data-fr="Transformer un outil historique en plateforme SaaS critique." data-en="Transforming a legacy tool into a critical SaaS platform.">Transformer un outil historique en plateforme SaaS critique.</h2>
+          <p class="section-lede" data-fr="Technical Product Manager pour une plateforme MAM utilisée quotidiennement par les équipes éditoriales, opérationnelles et techniques de plus de dix marchés européens." data-en="Technical Product Manager for a MAM platform used daily by editorial, operational, and technical teams across more than ten European markets.">Technical Product Manager pour une plateforme MAM utilisée quotidiennement par les équipes éditoriales, opérationnelles et techniques de plus de dix marchés européens.</p>
+
+          <div class="case-content">
+            <article class="case-chapter">
+              <div class="chapter-label" data-fr="01 / Contexte" data-en="01 / Context">01 / Contexte</div>
+              <div>
+                <h3 data-fr="Une transformation de plateforme, pas un simple remplacement d’outil" data-en="A platform transformation, not a simple tool replacement">Une transformation de plateforme, pas un simple remplacement d’outil</h3>
+                <p data-fr="Faire évoluer un outil desktop historique vers une plateforme MAM cloud couvrant l’ingest, la recherche, l’édition, les métadonnées, les logs et l’export, sans interrompre les opérations quotidiennes." data-en="Move a legacy desktop tool to a cloud MAM platform covering ingest, search, editing, metadata, logging, and export without disrupting daily operations.">Faire évoluer un outil desktop historique vers une plateforme MAM cloud couvrant l’ingest, la recherche, l’édition, les métadonnées, les logs et l’export, sans interrompre les opérations quotidiennes.</p>
+              </div>
+            </article>
+
+            <article class="case-chapter">
+              <div class="chapter-label" data-fr="02 / Responsabilité" data-en="02 / Ownership">02 / Responsabilité</div>
+              <ul class="case-points">
+                {missionOwnership.map((item) => <li data-fr={item.fr} data-en={item.en}>{item.fr}</li>)}
+              </ul>
+            </article>
+
+            <article class="case-chapter">
+              <div class="chapter-label" data-fr="03 / Résultats" data-en="03 / Outcomes">03 / Résultats</div>
+              <div>
+                <h3 data-fr="Fiabilité opérationnelle et recherche plus efficace" data-en="Operational reliability and more effective search">Fiabilité opérationnelle et recherche plus efficace</h3>
+                <p data-fr="Amélioration des parcours d’ingest, d’enregistrement, de lecture et d’export, avec diagnostic des incidents de production, recherche des causes racines et mise en place de solutions de contournement." data-en="Improved ingest, recording, playback, and export workflows through production troubleshooting, root-cause analysis, and practical workarounds.">Amélioration des parcours d’ingest, d’enregistrement, de lecture et d’export, avec diagnostic des incidents de production, recherche des causes racines et mise en place de solutions de contournement.</p>
+                <div class="case-callout" data-fr="SEARCH — La recherche faisait partie de cette transformation : amélioration de la pertinence et réduction de 40 % du temps de chargement des résultats." data-en="SEARCH — Search was one workstream within this transformation: improved relevance and a 40% reduction in result-loading time.">SEARCH — La recherche faisait partie de cette transformation : amélioration de la pertinence et réduction de 40 % du temps de chargement des résultats.</div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="side-pane" aria-label="Données de la mission">
+          <div class="side-title"><span data-fr="Données mission" data-en="Mission data">Données mission</span><span>2019—NOW</span></div>
+          <dl class="status-list">
+            <div class="status-row"><dt data-fr="Organisation" data-en="Organisation">Organisation</dt><dd>Eurosport / WBD</dd></div>
+            <div class="status-row"><dt data-fr="Rôle" data-en="Role">Rôle</dt><dd>Technical PM</dd></div>
+            <div class="status-row"><dt data-fr="Produit" data-en="Product">Produit</dt><dd>Cloud SaaS MAM</dd></div>
+            <div class="status-row"><dt data-fr="Marchés" data-en="Markets">Marchés</dt><dd>10+</dd></div>
+          </dl>
+          <div class="impact-block">
+            <h2 class="impact-heading" data-fr="Échelle et impact" data-en="Scale and impact">Échelle et impact</h2>
+            <div class="impact"><strong>1M+</strong><span data-fr="actifs" data-en="assets">actifs</span></div>
+            <div class="impact"><strong>500+</strong><span data-fr="utilisateurs / jour" data-en="daily users">utilisateurs / jour</span></div>
+            <div class="impact impact-outcome"><strong>−40%</strong><span data-fr="chargement recherche" data-en="search loading">chargement recherche</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section
+        class="screen"
+        id="lab-panel"
+        data-panel="lab"
+        data-active="false"
+        role="tabpanel"
+        aria-labelledby="lab-tab"
+      >
+        <div class="main-pane" data-screen-label="PERSONAL LAB / 01">
+          <p class="eyebrow" data-fr="Laboratoire personnel" data-en="Personal lab">Laboratoire personnel</p>
+          <h2 class="section-title" data-fr="Explorer par la construction." data-en="Exploring by building.">Explorer par la construction.</h2>
+          <p class="section-lede" data-fr="Des prototypes personnels pour tester des usages concrets de l’IA, de la donnée et de l’automatisation. Ils démontrent une démarche d’apprentissage et de produit, pas des missions client." data-en="Personal prototypes testing practical uses of AI, data, and automation. They demonstrate a product-learning practice, not client engagements.">Des prototypes personnels pour tester des usages concrets de l’IA, de la donnée et de l’automatisation. Ils démontrent une démarche d’apprentissage et de produit, pas des missions client.</p>
+
+          <div class="actions lab-actions">
+            <a class="action" href="https://github.com/Erenejager?tab=repositories" target="_blank" rel="noreferrer" data-fr="Voir mes dépôts GitHub ↗" data-en="View my GitHub repositories ↗">Voir mes dépôts GitHub ↗</a>
+          </div>
+
+          <div class="lab-content">
+            {labs.map((lab) => (
+              <article class="lab-project">
+                <span class="lab-id">{lab.id}</span>
+                <h3 data-fr={lab.titleFr} data-en={lab.titleEn}>{lab.titleFr}</h3>
+                <p data-fr={lab.bodyFr} data-en={lab.bodyEn}>{lab.bodyFr}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside class="side-pane" aria-label="Données du laboratoire">
+          <div class="side-title"><span data-fr="État laboratoire" data-en="Lab status">État laboratoire</span><span>PERSONAL</span></div>
+          <dl class="status-list">
+            <div class="status-row"><dt data-fr="Nature" data-en="Nature">Nature</dt><dd data-fr="Projets personnels" data-en="Side projects">Projets personnels</dd></div>
+            <div class="status-row"><dt data-fr="Domaines" data-en="Domains">Domaines</dt><dd>AI / Data</dd></div>
+            <div class="status-row"><dt data-fr="Méthode" data-en="Method">Méthode</dt><dd>Build → Learn</dd></div>
+            <div class="status-row"><dt data-fr="Prototypes" data-en="Prototypes">Prototypes</dt><dd>4</dd></div>
+          </dl>
+          <div class="side-note">
+            <strong data-fr="● DISTINCTION EXPLICITE" data-en="● EXPLICIT DISTINCTION">● DISTINCTION EXPLICITE</strong>
+            <span data-fr="Ces travaux sont présentés séparément de l’expérience professionnelle et sans métriques commerciales inventées." data-en="This work is presented separately from professional experience and without invented commercial metrics.">Ces travaux sont présentés séparément de l’expérience professionnelle et sans métriques commerciales inventées.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section
+        class="screen"
+        id="experience-panel"
+        data-panel="experience"
+        data-active="false"
+        role="tabpanel"
+        aria-labelledby="experience-tab"
+      >
+        <div class="main-pane" data-screen-label="EXPERIENCE LOG / 01">
+          <p class="eyebrow" data-fr="Parcours professionnel" data-en="Professional experience">Parcours professionnel</p>
+          <h2 class="section-title" data-fr="Du besoin métier à la production." data-en="From business need to production.">Du besoin métier à la production.</h2>
+          <p class="section-lede" data-fr="Plus de sept ans à faire le lien entre utilisateurs, équipes techniques et objectifs métier sur des plateformes API, média et data." data-en="More than seven years connecting users, engineering teams, and business objectives across API, media, and data platforms.">Plus de sept ans à faire le lien entre utilisateurs, équipes techniques et objectifs métier sur des plateformes API, média et data.</p>
+
+          <div class="timeline">
+            {experience.map((item) => (
+              <article class="timeline-entry">
+                <div class="timeline-date">{item.date}</div>
+                <div>
+                  <h3>{item.company}</h3>
+                  <p class="timeline-role" data-fr={item.roleFr} data-en={item.roleEn}>{item.roleFr}</p>
+                  <p data-fr={item.bodyFr} data-en={item.bodyEn}>{item.bodyFr}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside class="side-pane" aria-label="Compétences principales">
+          <div class="side-title"><span data-fr="Capacités" data-en="Capabilities">Capacités</span><span>PM / PO</span></div>
+          {capabilities.map((capability) => (
+            <div class="capability-group">
+              <h3 data-fr={capability.fr} data-en={capability.en}>{capability.fr}</h3>
+              <p>{capability.items}</p>
+            </div>
+          ))}
+        </aside>
+      </section>
+
+      <section
+        class="screen"
+        id="skills-panel"
+        data-panel="skills"
+        data-active="false"
+        role="tabpanel"
+        aria-labelledby="skills-tab"
+      >
+        <div class="main-pane" data-screen-label="CAPABILITY MAP / 01">
+          <p class="eyebrow" data-fr="Compétences activées" data-en="Capabilities enabled">Compétences activées</p>
+          <h2 class="section-title" data-fr="Du cadrage à la mise en production." data-en="From framing to production.">Du cadrage à la mise en production.</h2>
+          <p class="section-lede" data-fr="Une sélection lisible des compétences que j’utilise pour piloter des produits complexes. Chaque groupe renvoie à une preuve dans le site." data-en="A focused selection of the skills I use to manage complex products. Each group links to supporting evidence on this site.">Une sélection lisible des compétences que j’utilise pour piloter des produits complexes. Chaque groupe renvoie à une preuve dans le site.</p>
+
+          <div class="skills-grid">
+            {skillGroups.map((group) => (
+              <article class="skill-group">
+                <span class="skill-code">{group.code}</span>
+                <h3 data-fr={group.titleFr} data-en={group.titleEn}>{group.titleFr}</h3>
+                <p>{group.items}</p>
+                <a href={`#${group.target}`} data-fr={group.proofFr} data-en={group.proofEn}>{group.proofFr} →</a>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside class="side-pane" aria-label="Lecture des compétences">
+          <div class="side-title"><span data-fr="Mode de lecture" data-en="How to read">Mode de lecture</span><span>EVIDENCE</span></div>
+          <dl class="status-list">
+            <div class="status-row"><dt data-fr="Positionnement" data-en="Positioning">Positionnement</dt><dd>PM / PO</dd></div>
+            <div class="status-row"><dt data-fr="Spécialité" data-en="Specialty">Spécialité</dt><dd data-fr="Produits complexes" data-en="Complex products">Produits complexes</dd></div>
+            <div class="status-row"><dt data-fr="Approche" data-en="Approach">Approche</dt><dd>Discovery → Run</dd></div>
+            <div class="status-row"><dt data-fr="Socle" data-en="Foundation">Socle</dt><dd data-fr="Ingénieur" data-en="Engineering">Ingénieur</dd></div>
+          </dl>
+          <div class="side-note">
+            <strong data-fr="● COMPÉTENCES PROUVÉES" data-en="● EVIDENCE-BASED SKILLS">● COMPÉTENCES PROUVÉES</strong>
+            <span data-fr="Les outils seuls ne définissent pas le profil. Ils sont reliés aux décisions, responsabilités et projets présentés ailleurs." data-en="Tools alone do not define the profile. They connect to the decisions, responsibilities, and projects shown elsewhere.">Les outils seuls ne définissent pas le profil. Ils sont reliés aux décisions, responsabilités et projets présentés ailleurs.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section
+        class="screen"
+        id="contact-panel"
+        data-panel="contact"
+        data-active="false"
+        role="tabpanel"
+        aria-labelledby="contact-tab"
+      >
+        <div class="main-pane" data-screen-label="CONTACT CHANNEL / 01">
+          <p class="eyebrow" data-fr="Canal de contact" data-en="Contact channel">Canal de contact</p>
+          <h2 class="section-title" data-fr="Parlons du prochain produit complexe." data-en="Let’s discuss the next complex product.">Parlons du prochain produit complexe.</h2>
+          <p class="section-lede" data-fr="Vous recherchez un Product Manager / Product Owner capable d’aligner besoins utilisateurs, priorités métier et contraintes techniques ? Échangeons directement." data-en="Looking for a Product Manager / Product Owner who can align user needs, business priorities, and technical constraints? Let’s talk directly.">Vous recherchez un Product Manager / Product Owner capable d’aligner besoins utilisateurs, priorités métier et contraintes techniques ? Échangeons directement.</p>
+
+          <div class="contact-links">
+            <a class="contact-link-row" href="mailto:ghariani.aziz@gmail.com">
+              <span class="contact-channel">Email</span>
+              <span class="contact-value">ghariani.aziz@gmail.com</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-link-row" href="https://calendly.com/ghariani-aziz" target="_blank" rel="noreferrer">
+              <span class="contact-channel">Calendly</span>
+              <span class="contact-value" data-fr="Réserver un échange" data-en="Book a conversation">Réserver un échange</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-link-row" href="https://www.linkedin.com/in/aziz-ghariani-6319b77a/" target="_blank" rel="noreferrer">
+              <span class="contact-channel">LinkedIn</span>
+              <span class="contact-value">linkedin.com/in/aziz-ghariani</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-link-row" href="https://github.com/Erenejager?tab=repositories" target="_blank" rel="noreferrer">
+              <span class="contact-channel">GitHub</span>
+              <span class="contact-value">github.com/Erenejager</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="side-pane" aria-label="Disponibilité">
+          <div class="side-title"><span data-fr="Disponibilité" data-en="Availability">Disponibilité</span><span>OPEN</span></div>
+          <dl class="status-list">
+            <div class="status-row"><dt data-fr="Localisation" data-en="Location">Localisation</dt><dd>Paris, France</dd></div>
+            <div class="status-row"><dt data-fr="Zone" data-en="Area">Zone</dt><dd>Paris / Remote</dd></div>
+            <div class="status-row"><dt data-fr="Langues" data-en="Languages">Langues</dt><dd>FR / EN</dd></div>
+            <div class="status-row"><dt data-fr="Statut" data-en="Status">Statut</dt><dd class="online" data-fr="Disponible" data-en="Available">Disponible</dd></div>
+          </dl>
+          <div class="side-note">
+            <strong data-fr="● RÉPONSE DIRECTE" data-en="● DIRECT RESPONSE">● RÉPONSE DIRECTE</strong>
+            <span data-fr="Email pour une prise de contact rapide, Calendly pour planifier, LinkedIn pour le profil et GitHub pour les projets." data-en="Email for direct contact, Calendly to schedule, LinkedIn for the profile, and GitHub for projects.">Email pour une prise de contact rapide, Calendly pour planifier, LinkedIn pour le profil et GitHub pour les projets.</span>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <KeyBar />
+  </div>
+
+  <script src="../scripts/interface.js"></script>
+</BaseLayout>

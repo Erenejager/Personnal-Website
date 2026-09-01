@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import '@fontsource/ibm-plex-mono/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-700.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#143f78" />
+    <meta name="color-scheme" content="light" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta name="twitter:card" content="summary" />
+    <title>{title}</title>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Aziz Ghariani',
+      jobTitle: 'Product Manager / Product Owner',
+      url: 'https://azizghariani.xyz',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Paris',
+        addressCountry: 'FR',
+      },
+      sameAs: [
+        'https://www.linkedin.com/in/aziz-ghariani-6319b77a/',
+        'https://github.com/Erenejager',
+      ],
+      knowsLanguage: ['fr', 'en'],
+    })} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-panel">Aller au contenu</a>
+    <div class="startup-scan" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

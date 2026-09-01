@@ -1,0 +1,19 @@
+---
+const keys = [
+  { key: 'F1', fr: 'Profil', en: 'Profile' },
+  { key: 'F2', fr: 'Mission', en: 'Mission' },
+  { key: 'F3', fr: 'Laboratoire', en: 'Personal lab' },
+  { key: 'F4', fr: 'Parcours', en: 'Experience' },
+  { key: 'F5', fr: 'Compétences', en: 'Skills' },
+  { key: 'F6', fr: 'Contact', en: 'Contact' },
+];
+---
+
+<footer class="key-bar" aria-label="Raccourcis clavier">
+  {keys.map((item) => (
+    <span><b class="key">{item.key}</b><span data-fr={item.fr} data-en={item.en}>{item.fr}</span></span>
+  ))}
+  <a href="https://calendly.com/ghariani-aziz" target="_blank" rel="noreferrer">
+    <b class="key">F10</b><span data-fr="Planifier" data-en="Schedule">Planifier</span>
+  </a>
+</footer>
