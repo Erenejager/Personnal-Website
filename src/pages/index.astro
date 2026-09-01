@@ -4,22 +4,41 @@ import UtilityBar from '../components/UtilityBar.astro';
 import TabNavigation from '../components/TabNavigation.astro';
 import KeyBar from '../components/KeyBar.astro';
 
-const missionOwnership = [
+const missionDecisions = [
   {
-    fr: 'Pilotage de la roadmap et traduction des objectifs métier en priorités et jalons de livraison.',
-    en: 'Owned the roadmap and translated business objectives into priorities and delivery milestones.',
+    fr: 'Traiter la migration comme une transformation des workflows, pas comme un simple remplacement d’outil.',
+    en: 'Treat the migration as a workflow transformation, not a simple tool replacement.',
   },
   {
-    fr: 'Entretiens utilisateurs, ateliers de besoins et études d’usage dans plusieurs marchés.',
-    en: 'Ran user interviews, requirements workshops, and usability studies across several markets.',
+    fr: 'Prioriser les parcours critiques : ingest, enregistrement, recherche, métadonnées, lecture et export.',
+    en: 'Prioritise critical workflows: ingest, recording, search, metadata, playback, and export.',
   },
   {
-    fr: 'Gestion des cycles de release de bout en bout, du développement à la production.',
-    en: 'Managed complete release cycles from development through QA to production.',
+    fr: 'Rendre la pertinence de recherche pilotable grâce aux filtres, boosts et pondérations de métadonnées.',
+    en: 'Make search relevance manageable through filters, boosts, and metadata weighting.',
   },
   {
-    fr: 'Alignement des équipes éditoriales, opérationnelles et techniques.',
-    en: 'Aligned editorial, operational, and technical teams.',
+    fr: 'Faire converger les besoins de plus de dix marchés vers une roadmap et un modèle de plateforme communs.',
+    en: 'Converge the needs of more than ten markets into one roadmap and shared platform model.',
+  },
+];
+
+const missionExecution = [
+  {
+    fr: 'Discovery multi-marchés : entretiens utilisateurs, ateliers de besoins et études d’usage.',
+    en: 'Multi-market discovery through user interviews, requirements workshops, and usability studies.',
+  },
+  {
+    fr: 'Pilotage du backlog et des cycles complets Dev → QA → Production.',
+    en: 'Backlog ownership and complete Dev → QA → Production release cycles.',
+  },
+  {
+    fr: 'Diagnostic des incidents, analyse des causes racines et coordination des solutions de contournement.',
+    en: 'Incident diagnosis, root-cause analysis, and coordination of practical workarounds.',
+  },
+  {
+    fr: 'Adoption produit par les démonstrations, formations, newsletters et boucles de feedback.',
+    en: 'Product adoption through demos, training, newsletters, and feedback loops.',
   },
 ];
 
@@ -54,48 +73,121 @@ const labs = [
   },
 ];
 
-const experience = [
+const professionalExperience = [
   {
+    id: 'eurosport',
     date: '10/2019 — NOW',
     company: 'Eurosport / Warner Bros. Discovery',
     roleFr: 'Technical Product Manager — Video Streaming & OTT',
     roleEn: 'Technical Product Manager — Video Streaming & OTT',
-    bodyFr: 'Transformation d’une plateforme MAM critique, pilotage de la roadmap, discovery multi-marchés, releases de bout en bout et résolution d’incidents de production.',
-    bodyEn: 'Critical MAM platform transformation, roadmap ownership, multi-market discovery, end-to-end releases, and production incident resolution.',
+    summaryFr: 'Transformation et exploitation d’une plateforme MAM SaaS critique à l’échelle européenne.',
+    summaryEn: 'Transformation and operation of a critical SaaS MAM platform at European scale.',
+    contextFr: '1M+ actifs · 500+ utilisateurs quotidiens · 10+ marchés européens',
+    contextEn: '1M+ assets · 500+ daily users · 10+ European markets',
+    responsibilities: [
+      {
+        fr: 'Pilotage de la roadmap et traduction des objectifs métier en priorités et jalons de livraison.',
+        en: 'Owned the roadmap and translated business objectives into priorities and delivery milestones.',
+      },
+      {
+        fr: 'Discovery multi-marchés : entretiens, ateliers de besoins et études d’usage.',
+        en: 'Led multi-market discovery through interviews, requirements workshops, and usability studies.',
+      },
+      {
+        fr: 'Gestion des releases de bout en bout et coordination Dev, QA et Production.',
+        en: 'Managed end-to-end releases and coordinated Development, QA, and Production.',
+      },
+      {
+        fr: 'Amélioration de la recherche Elasticsearch et des performances de la plateforme SaaS.',
+        en: 'Improved Elasticsearch search and SaaS platform performance.',
+      },
+      {
+        fr: 'Résolution d’incidents et alignement des équipes éditoriales, opérationnelles et techniques.',
+        en: 'Resolved incidents and aligned editorial, operational, and technical teams.',
+      },
+    ],
+    tools: 'MAM SaaS · Elasticsearch · Build & Run · Roadmap · Discovery · Release management',
+    outcomeFr: 'Recherche plus pertinente et chargement des résultats réduit de 40 %, avec des workflows plus fiables.',
+    outcomeEn: 'More relevant search and 40% faster result loading, with more reliable workflows.',
   },
   {
+    id: 'sncf',
     date: '02/2019 — 07/2019',
     company: 'SNCF Gares & Connexions',
     roleFr: 'Product Owner API',
     roleEn: 'API Product Owner',
-    bodyFr: 'Pilotage d’API d’ingestion pour les flux de trafic ferroviaire, ateliers parties prenantes et définition des contrats d’interface.',
-    bodyEn: 'Managed data-ingestion APIs for railway traffic flows, facilitated stakeholder workshops, and defined interface contracts.',
+    summaryFr: 'Produit API pour l’ingestion et la circulation de données de trafic ferroviaire.',
+    summaryEn: 'API product for ingesting and distributing railway traffic data.',
+    contextFr: 'APIs de données · Flux ferroviaires · Multiples parties prenantes',
+    contextEn: 'Data APIs · Railway flows · Multiple stakeholders',
+    responsibilities: [
+      {
+        fr: 'Pilotage des APIs d’ingestion de données de trafic ferroviaire.',
+        en: 'Managed railway traffic data-ingestion APIs.',
+      },
+      {
+        fr: 'Animation d’ateliers pour collecter et formaliser les besoins.',
+        en: 'Facilitated workshops to gather and formalise requirements.',
+      },
+      {
+        fr: 'Définition des contrats d’interface avec les équipes techniques et métier.',
+        en: 'Defined interface contracts with engineering and business teams.',
+      },
+    ],
+    tools: 'REST APIs · Data ingestion · Interface contracts · Stakeholder workshops',
+    outcomeFr: 'Un cadre produit et des interfaces explicites pour fiabiliser les échanges de données.',
+    outcomeEn: 'A clear product framework and explicit interfaces for more reliable data exchange.',
   },
   {
-    date: '09/2016',
-    company: 'Telecom Lille',
-    roleFr: 'Diplôme d’ingénieur — Télécommunications',
-    roleEn: 'Engineering master’s degree — Telecommunications',
-    bodyFr: 'Formation d’ingénieur constituant le socle technique utilisé pour collaborer avec les équipes de développement et d’architecture.',
-    bodyEn: 'Engineering background providing the technical foundation used to work with development and architecture teams.',
+    id: 'renault',
+    date: '07/2017 — 01/2019',
+    company: 'Renault',
+    roleFr: 'Product Owner',
+    roleEn: 'Product Owner',
+    summaryFr: 'Déploiement d’une application web de configuration automobile et migration cloud.',
+    summaryEn: 'Car-configurator web application rollout and cloud migration.',
+    contextFr: 'Web application · Déploiement produit · Migration AWS',
+    contextEn: 'Web application · Product rollout · AWS migration',
+    responsibilities: [
+      {
+        fr: 'Coordination du déploiement d’une Web App de configurateur automobile.',
+        en: 'Coordinated the rollout of a car-configurator web application.',
+      },
+      {
+        fr: 'Pilotage de la migration de l’application vers AWS.',
+        en: 'Managed the application migration to AWS.',
+      },
+    ],
+    tools: 'Web application · Product rollout · AWS migration',
+    outcomeFr: 'Déploiement produit et transition cloud pilotés dans un environnement groupe.',
+    outcomeEn: 'Product rollout and cloud transition managed within an enterprise environment.',
   },
 ];
 
-const capabilities = [
+const education = [
   {
-    fr: 'Stratégie et discovery',
-    en: 'Strategy and discovery',
-    items: 'Product strategy · User research · Design Thinking · JTBD · OKRs · Stakeholder management',
+    date: '09/2016',
+    organisation: 'Telecom Lille',
+    titleFr: 'Diplôme d’ingénieur — Télécommunications',
+    titleEn: 'Engineering master’s degree — Telecommunications',
+    typeFr: 'Formation initiale',
+    typeEn: 'Degree',
   },
   {
-    fr: 'Delivery et opérations',
-    en: 'Delivery and operations',
-    items: 'Roadmap · Backlog · Build & Run · Release management · Incidents · KPI monitoring',
+    date: 'CERTIFICATE',
+    organisation: 'University of California, Berkeley',
+    titleFr: 'Certification en Product Management',
+    titleEn: 'Product Management Certificate',
+    typeFr: 'Formation continue',
+    typeEn: 'Continuing education',
   },
   {
-    fr: 'Profondeur technique',
-    en: 'Technical fluency',
-    items: 'REST APIs · Elasticsearch · Kafka · Microservices · SQL · Observability · AI / RAG',
+    date: 'CERTIFICATION',
+    organisation: 'Scrum.org',
+    titleFr: 'Professional Scrum Product Owner I',
+    titleEn: 'Professional Scrum Product Owner I',
+    typeFr: 'PSPO I',
+    typeEn: 'PSPO I',
   },
 ];
 
@@ -183,7 +275,7 @@ const pageDescription = 'Product Manager / Product Owner à Paris. Produits comp
             <div class="status-row"><dt data-fr="Expérience" data-en="Experience">Expérience</dt><dd data-fr="7+ ans" data-en="7+ years">7+ ans</dd></div>
             <div class="status-row"><dt data-fr="Disponibilité" data-en="Availability">Disponibilité</dt><dd class="online" data-fr="Ouvert" data-en="Open">Ouvert</dd></div>
             <div class="status-row"><dt data-fr="Langues" data-en="Languages">Langues</dt><dd>FR / EN</dd></div>
-            <div class="status-row"><dt data-fr="Certification" data-en="Certification">Certification</dt><dd>PSPO I</dd></div>
+            <div class="status-row"><dt data-fr="Certifications" data-en="Certifications">Certifications</dt><dd>PSPO I + Berkeley</dd></div>
           </dl>
           <div class="impact-block">
             <h2 class="impact-heading" data-fr="Impact sélectionné" data-en="Selected impact">Impact sélectionné</h2>
@@ -203,32 +295,43 @@ const pageDescription = 'Product Manager / Product Owner à Paris. Produits comp
         aria-labelledby="mission-tab"
       >
         <div class="main-pane" data-screen-label="MISSION FILE / 01">
-          <p class="eyebrow" data-fr="Mission 01 / Eurosport" data-en="Mission 01 / Eurosport">Mission 01 / Eurosport</p>
-          <h2 class="section-title" data-fr="Transformer un outil historique en plateforme SaaS critique." data-en="Transforming a legacy tool into a critical SaaS platform.">Transformer un outil historique en plateforme SaaS critique.</h2>
-          <p class="section-lede" data-fr="Technical Product Manager pour une plateforme MAM utilisée quotidiennement par les équipes éditoriales, opérationnelles et techniques de plus de dix marchés européens." data-en="Technical Product Manager for a MAM platform used daily by editorial, operational, and technical teams across more than ten European markets.">Technical Product Manager pour une plateforme MAM utilisée quotidiennement par les équipes éditoriales, opérationnelles et techniques de plus de dix marchés européens.</p>
+          <p class="eyebrow" data-fr="Mission 01 / Étude de cas" data-en="Mission 01 / Case study">Mission 01 / Étude de cas</p>
+          <h2 class="section-title" data-fr="Moderniser une plateforme critique sans interrompre les opérations." data-en="Modernising a critical platform without disrupting operations.">Moderniser une plateforme critique sans interrompre les opérations.</h2>
+          <p class="section-lede" data-fr="Chez Eurosport / Warner Bros. Discovery, j’ai piloté la transformation d’un outil desktop historique en plateforme MAM SaaS utilisée dans plus de dix marchés européens." data-en="At Eurosport / Warner Bros. Discovery, I led the transformation of a legacy desktop tool into a SaaS MAM platform used across more than ten European markets.">Chez Eurosport / Warner Bros. Discovery, j’ai piloté la transformation d’un outil desktop historique en plateforme MAM SaaS utilisée dans plus de dix marchés européens.</p>
 
           <div class="case-content">
             <article class="case-chapter">
-              <div class="chapter-label" data-fr="01 / Contexte" data-en="01 / Context">01 / Contexte</div>
+              <div class="chapter-label" data-fr="01 / Défi" data-en="01 / Challenge">01 / Défi</div>
               <div>
-                <h3 data-fr="Une transformation de plateforme, pas un simple remplacement d’outil" data-en="A platform transformation, not a simple tool replacement">Une transformation de plateforme, pas un simple remplacement d’outil</h3>
-                <p data-fr="Faire évoluer un outil desktop historique vers une plateforme MAM cloud couvrant l’ingest, la recherche, l’édition, les métadonnées, les logs et l’export, sans interrompre les opérations quotidiennes." data-en="Move a legacy desktop tool to a cloud MAM platform covering ingest, search, editing, metadata, logging, and export without disrupting daily operations.">Faire évoluer un outil desktop historique vers une plateforme MAM cloud couvrant l’ingest, la recherche, l’édition, les métadonnées, les logs et l’export, sans interrompre les opérations quotidiennes.</p>
+                <h3 data-fr="Faire évoluer le produit tout en protégeant les workflows quotidiens" data-en="Evolve the product while protecting daily workflows">Faire évoluer le produit tout en protégeant les workflows quotidiens</h3>
+                <p data-fr="La plateforme devait couvrir l’ingest, les enregistrements, la recherche, l’édition, les métadonnées, la lecture et l’export pour 500+ utilisateurs, sans fragiliser les opérations de dix marchés." data-en="The platform had to cover ingest, recording, search, editing, metadata, playback, and export for 500+ users without weakening operations across ten markets.">La plateforme devait couvrir l’ingest, les enregistrements, la recherche, l’édition, les métadonnées, la lecture et l’export pour 500+ utilisateurs, sans fragiliser les opérations de dix marchés.</p>
               </div>
             </article>
 
             <article class="case-chapter">
-              <div class="chapter-label" data-fr="02 / Responsabilité" data-en="02 / Ownership">02 / Responsabilité</div>
+              <div class="chapter-label" data-fr="02 / Décisions produit" data-en="02 / Product decisions">02 / Décisions produit</div>
               <ul class="case-points">
-                {missionOwnership.map((item) => <li data-fr={item.fr} data-en={item.en}>{item.fr}</li>)}
+                {missionDecisions.map((item) => <li data-fr={item.fr} data-en={item.en}>{item.fr}</li>)}
               </ul>
             </article>
 
             <article class="case-chapter">
-              <div class="chapter-label" data-fr="03 / Résultats" data-en="03 / Outcomes">03 / Résultats</div>
+              <div class="chapter-label" data-fr="03 / Exécution" data-en="03 / Execution">03 / Exécution</div>
+              <ul class="case-points">
+                {missionExecution.map((item) => <li data-fr={item.fr} data-en={item.en}>{item.fr}</li>)}
+              </ul>
+            </article>
+
+            <article class="case-chapter case-evidence">
+              <div class="chapter-label" data-fr="04 / Preuves" data-en="04 / Evidence">04 / Preuves</div>
               <div>
-                <h3 data-fr="Fiabilité opérationnelle et recherche plus efficace" data-en="Operational reliability and more effective search">Fiabilité opérationnelle et recherche plus efficace</h3>
-                <p data-fr="Amélioration des parcours d’ingest, d’enregistrement, de lecture et d’export, avec diagnostic des incidents de production, recherche des causes racines et mise en place de solutions de contournement." data-en="Improved ingest, recording, playback, and export workflows through production troubleshooting, root-cause analysis, and practical workarounds.">Amélioration des parcours d’ingest, d’enregistrement, de lecture et d’export, avec diagnostic des incidents de production, recherche des causes racines et mise en place de solutions de contournement.</p>
-                <div class="case-callout" data-fr="SEARCH — La recherche faisait partie de cette transformation : amélioration de la pertinence et réduction de 40 % du temps de chargement des résultats." data-en="SEARCH — Search was one workstream within this transformation: improved relevance and a 40% reduction in result-loading time.">SEARCH — La recherche faisait partie de cette transformation : amélioration de la pertinence et réduction de 40 % du temps de chargement des résultats.</div>
+                <div class="evidence-strip" aria-label="Résultats principaux">
+                  <div><strong>1M+</strong><span data-fr="actifs" data-en="assets">actifs</span></div>
+                  <div><strong>500+</strong><span data-fr="utilisateurs / jour" data-en="daily users">utilisateurs / jour</span></div>
+                  <div><strong>10+</strong><span data-fr="marchés" data-en="markets">marchés</span></div>
+                  <div class="evidence-outcome"><strong>−40%</strong><span data-fr="chargement recherche" data-en="search loading">chargement recherche</span></div>
+                </div>
+                <p data-fr="La pertinence de recherche et l’efficacité des workflows ont progressé. Les parcours d’ingest, d’enregistrement, de lecture et d’export ont gagné en fiabilité opérationnelle." data-en="Search relevance and workflow efficiency improved. Ingest, recording, playback, and export became more operationally reliable.">La pertinence de recherche et l’efficacité des workflows ont progressé. Les parcours d’ingest, d’enregistrement, de lecture et d’export ont gagné en fiabilité opérationnelle.</p>
               </div>
             </article>
           </div>
@@ -308,26 +411,72 @@ const pageDescription = 'Product Manager / Product Owner à Paris. Produits comp
           <p class="section-lede" data-fr="Plus de sept ans à faire le lien entre utilisateurs, équipes techniques et objectifs métier sur des plateformes API, média et data." data-en="More than seven years connecting users, engineering teams, and business objectives across API, media, and data platforms.">Plus de sept ans à faire le lien entre utilisateurs, équipes techniques et objectifs métier sur des plateformes API, média et data.</p>
 
           <div class="timeline">
-            {experience.map((item) => (
-              <article class="timeline-entry">
+            {professionalExperience.map((item, index) => (
+              <button
+                class="timeline-entry experience-select"
+                type="button"
+                data-experience-target={item.id}
+                aria-pressed={index === 0 ? 'true' : 'false'}
+              >
                 <div class="timeline-date">{item.date}</div>
                 <div>
                   <h3>{item.company}</h3>
                   <p class="timeline-role" data-fr={item.roleFr} data-en={item.roleEn}>{item.roleFr}</p>
-                  <p data-fr={item.bodyFr} data-en={item.bodyEn}>{item.bodyFr}</p>
+                  <p data-fr={item.summaryFr} data-en={item.summaryEn}>{item.summaryFr}</p>
                 </div>
-              </article>
+                <span class="experience-open" aria-hidden="true">↗</span>
+              </button>
             ))}
           </div>
+
+          <section class="education-section" aria-labelledby="education-title">
+            <div class="education-heading">
+              <span class="education-index">EDU / CERT</span>
+              <h3 id="education-title" data-fr="Formation & certifications" data-en="Education & certifications">Formation & certifications</h3>
+            </div>
+            <div class="education-grid">
+              {education.map((item) => (
+                <article class="education-entry">
+                  <span class="education-date">{item.date}</span>
+                  <h4>{item.organisation}</h4>
+                  <p data-fr={item.titleFr} data-en={item.titleEn}>{item.titleFr}</p>
+                  <span class="education-type" data-fr={item.typeFr} data-en={item.typeEn}>{item.typeFr}</span>
+                </article>
+              ))}
+            </div>
+          </section>
         </div>
 
-        <aside class="side-pane" aria-label="Compétences principales">
-          <div class="side-title"><span data-fr="Capacités" data-en="Capabilities">Capacités</span><span>PM / PO</span></div>
-          {capabilities.map((capability) => (
-            <div class="capability-group">
-              <h3 data-fr={capability.fr} data-en={capability.en}>{capability.fr}</h3>
-              <p>{capability.items}</p>
-            </div>
+        <aside class="side-pane experience-sidebar" aria-label="Détails de l’expérience sélectionnée">
+          {professionalExperience.map((item, index) => (
+            <section
+              class="experience-detail"
+              data-experience-detail={item.id}
+              data-active={index === 0 ? 'true' : 'false'}
+              aria-hidden={index === 0 ? 'false' : 'true'}
+            >
+              <div class="side-title"><span>{item.company}</span><span>{item.date}</span></div>
+              <div class="experience-context">
+                <span data-fr="Contexte" data-en="Context">Contexte</span>
+                <p data-fr={item.contextFr} data-en={item.contextEn}>{item.contextFr}</p>
+              </div>
+              <div class="experience-responsibilities">
+                <h3 data-fr="Responsabilités clés" data-en="Key responsibilities">Responsabilités clés</h3>
+                <ul>
+                  {item.responsibilities.map((responsibility) => (
+                    <li data-fr={responsibility.fr} data-en={responsibility.en}>{responsibility.fr}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="experience-meta">
+                <h3 data-fr="Périmètre & outils" data-en="Scope & tools">Périmètre & outils</h3>
+                <p>{item.tools}</p>
+              </div>
+              <div class="experience-outcome">
+                <h3 data-fr="Contribution" data-en="Contribution">Contribution</h3>
+                <p data-fr={item.outcomeFr} data-en={item.outcomeEn}>{item.outcomeFr}</p>
+              </div>
+            </section>
           ))}
         </aside>
       </section>

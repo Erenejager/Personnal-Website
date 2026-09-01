@@ -2,6 +2,8 @@ const tabs = [...document.querySelectorAll('[role="tab"][data-target]')];
 const panels = [...document.querySelectorAll('[data-panel]')];
 const languageButton = document.querySelector('#language-button');
 const shortcuts = new Map(tabs.map((tab) => [tab.dataset.key, tab.dataset.target]));
+const experienceButtons = [...document.querySelectorAll('[data-experience-target]')];
+const experienceDetails = [...document.querySelectorAll('[data-experience-detail]')];
 let language = 'fr';
 
 function setLanguage(nextLanguage) {
@@ -37,6 +39,22 @@ function activatePanel(target, updateHistory = true) {
   if (updateHistory) history.replaceState(null, '', `#${activeTarget}`);
 }
 
+function activateExperience(target) {
+  const activeButton = experienceButtons.find((button) => button.dataset.experienceTarget === target)
+    ?? experienceButtons[0];
+  const activeTarget = activeButton?.dataset.experienceTarget;
+
+  experienceButtons.forEach((button) => {
+    button.setAttribute('aria-pressed', String(button === activeButton));
+  });
+
+  experienceDetails.forEach((detail) => {
+    const selected = detail.dataset.experienceDetail === activeTarget;
+    detail.dataset.active = String(selected);
+    detail.setAttribute('aria-hidden', String(!selected));
+  });
+}
+
 tabs.forEach((tab) => {
   tab.addEventListener('click', (event) => {
     event.preventDefault();
@@ -54,6 +72,24 @@ tabs.forEach((tab) => {
         : (currentIndex + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
     tabs[nextIndex].focus();
     activatePanel(tabs[nextIndex].dataset.target);
+  });
+});
+
+experienceButtons.forEach((button, index) => {
+  button.addEventListener('click', () => activateExperience(button.dataset.experienceTarget));
+
+  button.addEventListener('keydown', (event) => {
+    if (!['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const nextIndex = event.key === 'Home'
+      ? 0
+      : event.key === 'End'
+        ? experienceButtons.length - 1
+        : (index + (event.key === 'ArrowDown' ? 1 : -1) + experienceButtons.length)
+          % experienceButtons.length;
+    const nextButton = experienceButtons[nextIndex];
+    nextButton.focus();
+    activateExperience(nextButton.dataset.experienceTarget);
   });
 });
 
@@ -76,3 +112,4 @@ window.addEventListener('hashchange', () => {
 });
 
 activatePanel(location.hash.slice(1) || 'profile', false);
+activateExperience(experienceButtons[0]?.dataset.experienceTarget);
