@@ -18,6 +18,5 @@ npm run preview
 - `src/components/` — BIOS shell controls
 - `src/styles/global.css` — production visual system
 - `src/scripts/interface.js` — tabs, keyboard shortcuts, and language switching
-- `index.html` — preserved legacy website
 
 The production build is written to `dist/`. Vercel deploys the site automatically after updates to `main`.
