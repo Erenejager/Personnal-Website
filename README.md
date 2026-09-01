@@ -1,6 +1,6 @@
 # Aziz Ghariani — Portfolio
 
-Static portfolio built with Astro and deployed through GitHub Pages.
+Static portfolio built with Astro and deployed through Vercel from `main`.
 
 ## Commands
 
@@ -20,4 +20,4 @@ npm run preview
 - `src/scripts/interface.js` — tabs, keyboard shortcuts, and language switching
 - `index.html` — preserved legacy website
 
-The production build is written to `dist/` and deployed automatically from `main` through GitHub Actions.
+The production build is written to `dist/`. Vercel deploys the site automatically after updates to `main`.
