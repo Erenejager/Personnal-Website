@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#143f78"/>
+  <rect x="7" y="7" width="50" height="50" fill="#fbfaf4" stroke="#101820" stroke-width="3"/>
+  <text
+    x="32"
+    y="41"
+    fill="#143f78"
+    font-family="'Courier New', monospace"
+    font-size="26"
+    font-weight="700"
+    letter-spacing="-3"
+    text-anchor="middle"
+  >AG</text>
+</svg>
